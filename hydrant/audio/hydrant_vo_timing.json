@@ -1,0 +1,1276 @@
+{
+ "audio": "hydrant_cepat115.mp3",
+ "speed": 1.15,
+ "fps": 30,
+ "duration": 64.261224,
+ "beats": [
+  {
+   "beat": 1,
+   "start": 0.0,
+   "end": 7.652,
+   "text": "Leave a pipe full of water out on the street in January, and it freezes solid. Ice takes up about nine percent more space, and it cracks iron."
+  },
+  {
+   "beat": 2,
+   "start": 7.757,
+   "end": 13.357,
+   "text": "So you bury the water main deep. Below the frost line, the ground never freezes, even when it's freezing up top."
+  },
+  {
+   "beat": 3,
+   "start": 13.461,
+   "end": 20.22,
+   "text": "But firefighters need that water up here. So you run a pipe up to the street. Now that pipe is full of water, sitting in the cold air."
+  },
+  {
+   "beat": 4,
+   "start": 20.267,
+   "end": 24.185,
+   "text": "It freezes. And the night there's a fire, your hydrant is a block of ice."
+  },
+  {
+   "beat": 5,
+   "start": 24.232,
+   "end": 30.284,
+   "text": "Here's the trick: move the valve. Put it way down at the bottom, next to the main, as deep as seven feet underground."
+  },
+  {
+   "beat": 6,
+   "start": 30.307,
+   "end": 37.113,
+   "text": "When it's closed, the water stops down there, in the warm ground. The part above the street stays empty. That's a dry barrel hydrant."
+  },
+  {
+   "beat": 7,
+   "start": 37.148,
+   "end": 44.823,
+   "text": "To open it, a long steel rod runs from the valve all the way up to the nut on top. Firefighters turn the nut, the valve opens, and water shoots up."
+  },
+  {
+   "beat": 8,
+   "start": 44.846,
+   "end": 53.009,
+   "text": "But when they shut it, the barrel is still full of water. So there's a tiny drain hole at the bottom. It opens when the valve closes, and the water soaks into the gravel."
+  },
+  {
+   "beat": 9,
+   "start": 53.078,
+   "end": 54.783,
+   "text": "Empty barrel. Nothing to freeze."
+  },
+  {
+   "beat": 10,
+   "start": 54.817,
+   "end": 61.043,
+   "text": "In Florida and Southern California, it never freezes, so hydrants there just stay full. Those are wet barrel hydrants."
+  },
+  {
+   "beat": 11,
+   "start": 61.078,
+   "end": 64.278,
+   "text": "But wait. Why is the nut on top of your hydrant five-sided?"
+  }
+ ],
+ "words": [
+  {
+   "text": "Leave",
+   "start": 0.0,
+   "end": 0.209
+  },
+  {
+   "text": "a",
+   "start": 0.243,
+   "end": 0.278
+  },
+  {
+   "text": "pipe",
+   "start": 0.348,
+   "end": 0.557
+  },
+  {
+   "text": "full",
+   "start": 0.626,
+   "end": 0.696
+  },
+  {
+   "text": "of",
+   "start": 0.73,
+   "end": 0.765
+  },
+  {
+   "text": "water",
+   "start": 0.835,
+   "end": 1.113
+  },
+  {
+   "text": "out",
+   "start": 1.183,
+   "end": 1.252
+  },
+  {
+   "text": "on",
+   "start": 1.322,
+   "end": 1.357
+  },
+  {
+   "text": "the",
+   "start": 1.391,
+   "end": 1.461
+  },
+  {
+   "text": "street",
+   "start": 1.53,
+   "end": 1.67
+  },
+  {
+   "text": "in",
+   "start": 1.739,
+   "end": 1.809
+  },
+  {
+   "text": "January,",
+   "start": 1.878,
+   "end": 2.504
+  },
+  {
+   "text": "and",
+   "start": 2.539,
+   "end": 2.574
+  },
+  {
+   "text": "it",
+   "start": 2.643,
+   "end": 2.713
+  },
+  {
+   "text": "freezes",
+   "start": 2.783,
+   "end": 3.2
+  },
+  {
+   "text": "solid.",
+   "start": 3.27,
+   "end": 3.896
+  },
+  {
+   "text": "Ice",
+   "start": 3.965,
+   "end": 4.104
+  },
+  {
+   "text": "takes",
+   "start": 4.174,
+   "end": 4.313
+  },
+  {
+   "text": "up",
+   "start": 4.383,
+   "end": 4.452
+  },
+  {
+   "text": "about",
+   "start": 4.591,
+   "end": 4.73
+  },
+  {
+   "text": "nine",
+   "start": 4.8,
+   "end": 4.939
+  },
+  {
+   "text": "percent",
+   "start": 5.009,
+   "end": 5.357
+  },
+  {
+   "text": "more",
+   "start": 5.426,
+   "end": 5.496
+  },
+  {
+   "text": "space,",
+   "start": 5.565,
+   "end": 6.122
+  },
+  {
+   "text": "and",
+   "start": 6.261,
+   "end": 6.4
+  },
+  {
+   "text": "it",
+   "start": 6.47,
+   "end": 6.609
+  },
+  {
+   "text": "cracks",
+   "start": 6.678,
+   "end": 7.026
+  },
+  {
+   "text": "iron.",
+   "start": 7.096,
+   "end": 7.652
+  },
+  {
+   "text": "So",
+   "start": 7.757,
+   "end": 7.861
+  },
+  {
+   "text": "you",
+   "start": 8.07,
+   "end": 8.209
+  },
+  {
+   "text": "bury",
+   "start": 8.348,
+   "end": 8.487
+  },
+  {
+   "text": "the",
+   "start": 8.522,
+   "end": 8.557
+  },
+  {
+   "text": "water",
+   "start": 8.626,
+   "end": 8.765
+  },
+  {
+   "text": "main",
+   "start": 8.835,
+   "end": 9.043
+  },
+  {
+   "text": "deep.",
+   "start": 9.183,
+   "end": 9.67
+  },
+  {
+   "text": "Below",
+   "start": 9.774,
+   "end": 9.878
+  },
+  {
+   "text": "the",
+   "start": 9.913,
+   "end": 9.948
+  },
+  {
+   "text": "frost",
+   "start": 10.017,
+   "end": 10.226
+  },
+  {
+   "text": "line,",
+   "start": 10.296,
+   "end": 10.609
+  },
+  {
+   "text": "the",
+   "start": 10.643,
+   "end": 10.713
+  },
+  {
+   "text": "ground",
+   "start": 10.887,
+   "end": 11.061
+  },
+  {
+   "text": "never",
+   "start": 11.2,
+   "end": 11.339
+  },
+  {
+   "text": "freezes,",
+   "start": 11.409,
+   "end": 11.896
+  },
+  {
+   "text": "even",
+   "start": 11.965,
+   "end": 12.104
+  },
+  {
+   "text": "when",
+   "start": 12.174,
+   "end": 12.243
+  },
+  {
+   "text": "it's",
+   "start": 12.278,
+   "end": 12.383
+  },
+  {
+   "text": "freezing",
+   "start": 12.452,
+   "end": 12.661
+  },
+  {
+   "text": "up",
+   "start": 12.73,
+   "end": 12.8
+  },
+  {
+   "text": "top.",
+   "start": 12.939,
+   "end": 13.357
+  },
+  {
+   "text": "But",
+   "start": 13.461,
+   "end": 13.565
+  },
+  {
+   "text": "firefighters",
+   "start": 13.704,
+   "end": 14.191
+  },
+  {
+   "text": "need",
+   "start": 14.261,
+   "end": 14.4
+  },
+  {
+   "text": "that",
+   "start": 14.47,
+   "end": 14.609
+  },
+  {
+   "text": "water",
+   "start": 14.713,
+   "end": 14.817
+  },
+  {
+   "text": "up",
+   "start": 14.887,
+   "end": 14.957
+  },
+  {
+   "text": "here.",
+   "start": 15.026,
+   "end": 15.629
+  },
+  {
+   "text": "So",
+   "start": 15.745,
+   "end": 15.861
+  },
+  {
+   "text": "you",
+   "start": 15.93,
+   "end": 16.0
+  },
+  {
+   "text": "run",
+   "start": 16.07,
+   "end": 16.139
+  },
+  {
+   "text": "a",
+   "start": 16.209,
+   "end": 16.278
+  },
+  {
+   "text": "pipe",
+   "start": 16.417,
+   "end": 16.557
+  },
+  {
+   "text": "up",
+   "start": 16.626,
+   "end": 16.696
+  },
+  {
+   "text": "to",
+   "start": 16.73,
+   "end": 16.765
+  },
+  {
+   "text": "the",
+   "start": 16.835,
+   "end": 16.904
+  },
+  {
+   "text": "street.",
+   "start": 17.078,
+   "end": 17.53
+  },
+  {
+   "text": "Now",
+   "start": 17.6,
+   "end": 17.67
+  },
+  {
+   "text": "that",
+   "start": 17.739,
+   "end": 17.878
+  },
+  {
+   "text": "pipe",
+   "start": 17.983,
+   "end": 18.087
+  },
+  {
+   "text": "is",
+   "start": 18.191,
+   "end": 18.296
+  },
+  {
+   "text": "full",
+   "start": 18.365,
+   "end": 18.435
+  },
+  {
+   "text": "of",
+   "start": 18.504,
+   "end": 18.574
+  },
+  {
+   "text": "water,",
+   "start": 18.713,
+   "end": 18.991
+  },
+  {
+   "text": "sitting",
+   "start": 19.061,
+   "end": 19.2
+  },
+  {
+   "text": "in",
+   "start": 19.27,
+   "end": 19.304
+  },
+  {
+   "text": "the",
+   "start": 19.339,
+   "end": 19.409
+  },
+  {
+   "text": "cold",
+   "start": 19.478,
+   "end": 19.687
+  },
+  {
+   "text": "air.",
+   "start": 19.757,
+   "end": 20.22
+  },
+  {
+   "text": "It",
+   "start": 20.267,
+   "end": 20.313
+  },
+  {
+   "text": "freezes.",
+   "start": 20.383,
+   "end": 21.102
+  },
+  {
+   "text": "And",
+   "start": 21.124,
+   "end": 21.148
+  },
+  {
+   "text": "the",
+   "start": 21.183,
+   "end": 21.217
+  },
+  {
+   "text": "night",
+   "start": 21.287,
+   "end": 21.357
+  },
+  {
+   "text": "there's",
+   "start": 21.426,
+   "end": 21.496
+  },
+  {
+   "text": "a",
+   "start": 21.565,
+   "end": 21.635
+  },
+  {
+   "text": "fire,",
+   "start": 21.704,
+   "end": 22.157
+  },
+  {
+   "text": "your",
+   "start": 22.191,
+   "end": 22.33
+  },
+  {
+   "text": "hydrant",
+   "start": 22.4,
+   "end": 22.748
+  },
+  {
+   "text": "is",
+   "start": 22.817,
+   "end": 22.887
+  },
+  {
+   "text": "a",
+   "start": 22.957,
+   "end": 23.026
+  },
+  {
+   "text": "block",
+   "start": 23.13,
+   "end": 23.235
+  },
+  {
+   "text": "of",
+   "start": 23.304,
+   "end": 23.443
+  },
+  {
+   "text": "ice.",
+   "start": 23.513,
+   "end": 24.185
+  },
+  {
+   "text": "Here's",
+   "start": 24.232,
+   "end": 24.348
+  },
+  {
+   "text": "the",
+   "start": 24.383,
+   "end": 24.417
+  },
+  {
+   "text": "trick:",
+   "start": 24.487,
+   "end": 25.043
+  },
+  {
+   "text": "move",
+   "start": 25.113,
+   "end": 25.322
+  },
+  {
+   "text": "the",
+   "start": 25.391,
+   "end": 25.53
+  },
+  {
+   "text": "valve.",
+   "start": 25.67,
+   "end": 26.25
+  },
+  {
+   "text": "Put",
+   "start": 26.272,
+   "end": 26.296
+  },
+  {
+   "text": "it",
+   "start": 26.365,
+   "end": 26.574
+  },
+  {
+   "text": "way",
+   "start": 26.678,
+   "end": 26.783
+  },
+  {
+   "text": "down",
+   "start": 26.852,
+   "end": 26.922
+  },
+  {
+   "text": "at",
+   "start": 26.991,
+   "end": 27.061
+  },
+  {
+   "text": "the",
+   "start": 27.096,
+   "end": 27.13
+  },
+  {
+   "text": "bottom,",
+   "start": 27.2,
+   "end": 27.594
+  },
+  {
+   "text": "next",
+   "start": 27.641,
+   "end": 27.687
+  },
+  {
+   "text": "to",
+   "start": 27.757,
+   "end": 27.826
+  },
+  {
+   "text": "the",
+   "start": 27.861,
+   "end": 27.896
+  },
+  {
+   "text": "main,",
+   "start": 27.965,
+   "end": 28.348
+  },
+  {
+   "text": "as",
+   "start": 28.383,
+   "end": 28.522
+  },
+  {
+   "text": "deep",
+   "start": 28.591,
+   "end": 28.661
+  },
+  {
+   "text": "as",
+   "start": 28.73,
+   "end": 28.87
+  },
+  {
+   "text": "seven",
+   "start": 28.939,
+   "end": 29.217
+  },
+  {
+   "text": "feet",
+   "start": 29.287,
+   "end": 29.426
+  },
+  {
+   "text": "underground.",
+   "start": 29.496,
+   "end": 30.284
+  },
+  {
+   "text": "When",
+   "start": 30.307,
+   "end": 30.33
+  },
+  {
+   "text": "it's",
+   "start": 30.4,
+   "end": 30.539
+  },
+  {
+   "text": "closed,",
+   "start": 30.817,
+   "end": 31.142
+  },
+  {
+   "text": "the",
+   "start": 31.189,
+   "end": 31.235
+  },
+  {
+   "text": "water",
+   "start": 31.374,
+   "end": 31.513
+  },
+  {
+   "text": "stops",
+   "start": 31.722,
+   "end": 31.93
+  },
+  {
+   "text": "down",
+   "start": 32.035,
+   "end": 32.139
+  },
+  {
+   "text": "there,",
+   "start": 32.278,
+   "end": 32.441
+  },
+  {
+   "text": "in",
+   "start": 32.463,
+   "end": 32.487
+  },
+  {
+   "text": "the",
+   "start": 32.557,
+   "end": 32.626
+  },
+  {
+   "text": "warm",
+   "start": 32.73,
+   "end": 32.835
+  },
+  {
+   "text": "ground.",
+   "start": 32.904,
+   "end": 33.484
+  },
+  {
+   "text": "The",
+   "start": 33.507,
+   "end": 33.53
+  },
+  {
+   "text": "part",
+   "start": 33.6,
+   "end": 33.739
+  },
+  {
+   "text": "above",
+   "start": 33.878,
+   "end": 34.017
+  },
+  {
+   "text": "the",
+   "start": 34.087,
+   "end": 34.157
+  },
+  {
+   "text": "street",
+   "start": 34.33,
+   "end": 34.504
+  },
+  {
+   "text": "stays",
+   "start": 34.539,
+   "end": 34.713
+  },
+  {
+   "text": "empty.",
+   "start": 34.783,
+   "end": 35.374
+  },
+  {
+   "text": "That's",
+   "start": 35.409,
+   "end": 35.687
+  },
+  {
+   "text": "a",
+   "start": 35.826,
+   "end": 35.861
+  },
+  {
+   "text": "dry",
+   "start": 35.896,
+   "end": 36.174
+  },
+  {
+   "text": "barrel",
+   "start": 36.243,
+   "end": 36.452
+  },
+  {
+   "text": "hydrant.",
+   "start": 36.557,
+   "end": 37.113
+  },
+  {
+   "text": "To",
+   "start": 37.148,
+   "end": 37.217
+  },
+  {
+   "text": "open",
+   "start": 37.287,
+   "end": 37.426
+  },
+  {
+   "text": "it,",
+   "start": 37.496,
+   "end": 37.739
+  },
+  {
+   "text": "a",
+   "start": 37.774,
+   "end": 37.843
+  },
+  {
+   "text": "long",
+   "start": 37.913,
+   "end": 38.191
+  },
+  {
+   "text": "steel",
+   "start": 38.261,
+   "end": 38.47
+  },
+  {
+   "text": "rod",
+   "start": 38.539,
+   "end": 38.817
+  },
+  {
+   "text": "runs",
+   "start": 38.887,
+   "end": 39.026
+  },
+  {
+   "text": "from",
+   "start": 39.096,
+   "end": 39.165
+  },
+  {
+   "text": "the",
+   "start": 39.235,
+   "end": 39.304
+  },
+  {
+   "text": "valve",
+   "start": 39.409,
+   "end": 39.652
+  },
+  {
+   "text": "all",
+   "start": 39.722,
+   "end": 39.861
+  },
+  {
+   "text": "the",
+   "start": 39.93,
+   "end": 40.0
+  },
+  {
+   "text": "way",
+   "start": 40.07,
+   "end": 40.139
+  },
+  {
+   "text": "up",
+   "start": 40.209,
+   "end": 40.278
+  },
+  {
+   "text": "to",
+   "start": 40.313,
+   "end": 40.348
+  },
+  {
+   "text": "the",
+   "start": 40.417,
+   "end": 40.487
+  },
+  {
+   "text": "nut",
+   "start": 40.557,
+   "end": 40.626
+  },
+  {
+   "text": "on",
+   "start": 40.696,
+   "end": 40.765
+  },
+  {
+   "text": "top.",
+   "start": 40.835,
+   "end": 41.357
+  },
+  {
+   "text": "Firefighters",
+   "start": 41.391,
+   "end": 41.948
+  },
+  {
+   "text": "turn",
+   "start": 42.017,
+   "end": 42.087
+  },
+  {
+   "text": "the",
+   "start": 42.157,
+   "end": 42.226
+  },
+  {
+   "text": "nut,",
+   "start": 42.4,
+   "end": 42.609
+  },
+  {
+   "text": "the",
+   "start": 42.643,
+   "end": 42.713
+  },
+  {
+   "text": "valve",
+   "start": 42.783,
+   "end": 42.922
+  },
+  {
+   "text": "opens,",
+   "start": 42.991,
+   "end": 43.478
+  },
+  {
+   "text": "and",
+   "start": 43.548,
+   "end": 43.617
+  },
+  {
+   "text": "water",
+   "start": 43.687,
+   "end": 44.035
+  },
+  {
+   "text": "shoots",
+   "start": 44.104,
+   "end": 44.348
+  },
+  {
+   "text": "up.",
+   "start": 44.383,
+   "end": 44.823
+  },
+  {
+   "text": "But",
+   "start": 44.846,
+   "end": 44.87
+  },
+  {
+   "text": "when",
+   "start": 44.939,
+   "end": 45.009
+  },
+  {
+   "text": "they",
+   "start": 45.113,
+   "end": 45.217
+  },
+  {
+   "text": "shut",
+   "start": 45.252,
+   "end": 45.357
+  },
+  {
+   "text": "it,",
+   "start": 45.426,
+   "end": 45.67
+  },
+  {
+   "text": "the",
+   "start": 45.704,
+   "end": 45.774
+  },
+  {
+   "text": "barrel",
+   "start": 45.843,
+   "end": 46.122
+  },
+  {
+   "text": "is",
+   "start": 46.191,
+   "end": 46.33
+  },
+  {
+   "text": "still",
+   "start": 46.4,
+   "end": 46.609
+  },
+  {
+   "text": "full",
+   "start": 46.678,
+   "end": 46.748
+  },
+  {
+   "text": "of",
+   "start": 46.817,
+   "end": 46.887
+  },
+  {
+   "text": "water.",
+   "start": 47.165,
+   "end": 47.478
+  },
+  {
+   "text": "So",
+   "start": 47.513,
+   "end": 47.722
+  },
+  {
+   "text": "there's",
+   "start": 47.757,
+   "end": 47.861
+  },
+  {
+   "text": "a",
+   "start": 48.0,
+   "end": 48.139
+  },
+  {
+   "text": "tiny",
+   "start": 48.278,
+   "end": 48.417
+  },
+  {
+   "text": "drain",
+   "start": 48.487,
+   "end": 48.696
+  },
+  {
+   "text": "hole",
+   "start": 48.765,
+   "end": 48.904
+  },
+  {
+   "text": "at",
+   "start": 48.939,
+   "end": 48.974
+  },
+  {
+   "text": "the",
+   "start": 49.043,
+   "end": 49.113
+  },
+  {
+   "text": "bottom.",
+   "start": 49.391,
+   "end": 49.716
+  },
+  {
+   "text": "It",
+   "start": 49.763,
+   "end": 49.809
+  },
+  {
+   "text": "opens",
+   "start": 49.878,
+   "end": 50.157
+  },
+  {
+   "text": "when",
+   "start": 50.191,
+   "end": 50.226
+  },
+  {
+   "text": "the",
+   "start": 50.296,
+   "end": 50.365
+  },
+  {
+   "text": "valve",
+   "start": 50.435,
+   "end": 50.643
+  },
+  {
+   "text": "closes,",
+   "start": 50.806,
+   "end": 51.154
+  },
+  {
+   "text": "and",
+   "start": 51.177,
+   "end": 51.2
+  },
+  {
+   "text": "the",
+   "start": 51.27,
+   "end": 51.339
+  },
+  {
+   "text": "water",
+   "start": 51.409,
+   "end": 51.757
+  },
+  {
+   "text": "soaks",
+   "start": 51.826,
+   "end": 52.035
+  },
+  {
+   "text": "into",
+   "start": 52.104,
+   "end": 52.174
+  },
+  {
+   "text": "the",
+   "start": 52.243,
+   "end": 52.313
+  },
+  {
+   "text": "gravel.",
+   "start": 52.383,
+   "end": 53.009
+  },
+  {
+   "text": "Empty",
+   "start": 53.078,
+   "end": 53.148
+  },
+  {
+   "text": "barrel.",
+   "start": 53.217,
+   "end": 53.739
+  },
+  {
+   "text": "Nothing",
+   "start": 53.774,
+   "end": 53.983
+  },
+  {
+   "text": "to",
+   "start": 54.052,
+   "end": 54.122
+  },
+  {
+   "text": "freeze.",
+   "start": 54.435,
+   "end": 54.783
+  },
+  {
+   "text": "In",
+   "start": 54.817,
+   "end": 54.887
+  },
+  {
+   "text": "Florida",
+   "start": 54.957,
+   "end": 55.235
+  },
+  {
+   "text": "and",
+   "start": 55.304,
+   "end": 55.374
+  },
+  {
+   "text": "Southern",
+   "start": 55.443,
+   "end": 55.652
+  },
+  {
+   "text": "California,",
+   "start": 55.965,
+   "end": 56.313
+  },
+  {
+   "text": "it",
+   "start": 56.348,
+   "end": 56.487
+  },
+  {
+   "text": "never",
+   "start": 56.557,
+   "end": 56.765
+  },
+  {
+   "text": "freezes,",
+   "start": 56.835,
+   "end": 57.357
+  },
+  {
+   "text": "so",
+   "start": 57.391,
+   "end": 57.6
+  },
+  {
+   "text": "hydrants",
+   "start": 57.67,
+   "end": 58.017
+  },
+  {
+   "text": "there",
+   "start": 58.087,
+   "end": 58.296
+  },
+  {
+   "text": "just",
+   "start": 58.365,
+   "end": 58.435
+  },
+  {
+   "text": "stay",
+   "start": 58.504,
+   "end": 58.713
+  },
+  {
+   "text": "full.",
+   "start": 58.957,
+   "end": 59.235
+  },
+  {
+   "text": "Those",
+   "start": 59.27,
+   "end": 59.548
+  },
+  {
+   "text": "are",
+   "start": 59.617,
+   "end": 59.826
+  },
+  {
+   "text": "wet",
+   "start": 59.861,
+   "end": 60.035
+  },
+  {
+   "text": "barrel",
+   "start": 60.07,
+   "end": 60.243
+  },
+  {
+   "text": "hydrants.",
+   "start": 60.313,
+   "end": 61.043
+  },
+  {
+   "text": "But",
+   "start": 61.078,
+   "end": 61.148
+  },
+  {
+   "text": "wait.",
+   "start": 61.217,
+   "end": 61.704
+  },
+  {
+   "text": "Why",
+   "start": 61.774,
+   "end": 61.843
+  },
+  {
+   "text": "is",
+   "start": 61.913,
+   "end": 61.983
+  },
+  {
+   "text": "the",
+   "start": 62.052,
+   "end": 62.122
+  },
+  {
+   "text": "nut",
+   "start": 62.191,
+   "end": 62.33
+  },
+  {
+   "text": "on",
+   "start": 62.4,
+   "end": 62.539
+  },
+  {
+   "text": "top",
+   "start": 62.643,
+   "end": 62.748
+  },
+  {
+   "text": "of",
+   "start": 62.817,
+   "end": 62.887
+  },
+  {
+   "text": "your",
+   "start": 62.922,
+   "end": 62.957
+  },
+  {
+   "text": "hydrant",
+   "start": 63.026,
+   "end": 63.443
+  },
+  {
+   "text": "five-sided?",
+   "start": 63.583,
+   "end": 64.278
+  }
+ ]
+}
