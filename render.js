@@ -15,7 +15,7 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/ja
   '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.hdr': 'application/octet-stream' };
 
 const GL_FLAGS = {
-  gpu: ['--use-angle=vulkan', '--enable-features=Vulkan', '--disable-vulkan-surface', '--enable-gpu-rasterization', '--ignore-gpu-blocklist'],
+  gpu: ['--use-gl=angle', '--use-angle=gl-egl', '--disable-features=Vulkan', '--ignore-gpu-blocklist'],
   cpu: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
 };
 

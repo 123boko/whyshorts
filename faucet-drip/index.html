@@ -138,7 +138,10 @@ Promise.all([
   new GLTFLoader().loadAsync("valve_real.glb"),
 ]).then(([hdr, g]) => {
   hdr.mapping = THREE.EquirectangularReflectionMapping;
-  scene.environment = pmrem.fromEquirectangular(hdr).texture; scene.environmentIntensity = 1.15;
+  // The reflection map lives in a render target, which a lost WebGL context wipes; rebuild it on restore.
+  const makeEnv = () => { scene.environment = pmrem.fromEquirectangular(hdr).texture; };
+  renderer.domElement.addEventListener('webglcontextrestored', () => setTimeout(makeEnv, 0));
+  makeEnv(); scene.environmentIntensity = 1.15;
   scene.environmentRotation.set(0, 2.2, 0);
   scene.add(g.scene);
   g.scene.traverse((o) => { if (o.name) N[o.name] = o; });
@@ -150,7 +153,17 @@ Promise.all([
     o.castShadow = !water; o.receiveShadow = true;
   });
   try { build(); } catch (e) { console.log('BUILD ERROR ' + e.message); }
-  ready(true);
+  // render once to compile everything, then wait until the context is stable before reporting ready
+  composer.render();
+  const gl = renderer.getContext();
+  const settle = () => new Promise((r) => setTimeout(r, 500));
+  (async () => {
+    for (let i = 0; i < 40; i++) {
+      await settle();
+      if (!gl.isContextLost()) { composer.render(); await settle(); if (!gl.isContextLost()) break; }
+    }
+    ready(!gl.isContextLost());
+  })();
 }).catch((e) => { console.log('LOAD ERROR ' + e.message); ready(false); });
 
 const at = (f) => (f - 451) / 30;
