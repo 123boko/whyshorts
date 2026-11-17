@@ -12,7 +12,7 @@ const puppeteer = require('puppeteer-core');
 const log = (...a) => process.stderr.write(a.join(' ') + '\n');
 const ROOT = __dirname;
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.glb': 'model/gltf-binary',
-  '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.hdr': 'application/octet-stream' };
+  '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.hdr': 'application/octet-stream', '.otf': 'font/otf', '.mp3': 'audio/mpeg' };
 
 const GL_FLAGS = {
   gpu: ['--use-gl=angle', '--use-angle=gl-egl', '--disable-features=Vulkan', '--ignore-gpu-blocklist'],

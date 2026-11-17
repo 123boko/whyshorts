@@ -1,0 +1,1393 @@
+{
+ "audio": "faucet_take2_cepat115.mp3",
+ "speed": 1.15,
+ "fps": 30,
+ "duration": 70.243,
+ "beats": [
+  {
+   "beat": 1,
+   "start": 0.0,
+   "end": 6.47,
+   "frame_start": 0,
+   "frame_end": 194,
+   "text": "Cut open the pipe behind your sink and water blasts out. Nonstop. It's being pushed at around fifty pounds per square inch."
+  },
+  {
+   "beat": 2,
+   "start": 6.609,
+   "end": 11.339,
+   "frame_start": 198,
+   "frame_end": 340,
+   "text": "So you jam a metal plug in the hole. It stops. But now you can't get any water at all."
+  },
+  {
+   "beat": 3,
+   "start": 11.409,
+   "end": 16.974,
+   "frame_start": 342,
+   "frame_end": 509,
+   "text": "So you put the plug on a screw. Turn it one way, the plug lifts. Turn it back, it closes. That's a valve."
+  },
+  {
+   "beat": 4,
+   "start": 17.113,
+   "end": 21.913,
+   "frame_start": 513,
+   "frame_end": 657,
+   "text": "But it still leaks. Metal on metal never fits perfectly, and water finds every scratch."
+  },
+  {
+   "beat": 5,
+   "start": 22.052,
+   "end": 27.374,
+   "frame_start": 662,
+   "frame_end": 821,
+   "text": "So you add a soft rubber disc on the end of the plug. It squishes into the gaps and seals. That's a washer."
+  },
+  {
+   "beat": 6,
+   "start": 27.548,
+   "end": 33.322,
+   "frame_start": 826,
+   "frame_end": 1000,
+   "text": "Now water sneaks up the screw and out around the handle. So you wrap a rubber ring around the stem. That's an O-ring."
+  },
+  {
+   "beat": 7,
+   "start": 33.461,
+   "end": 40.0,
+   "frame_start": 1004,
+   "frame_end": 1200,
+   "text": "Congrats, you just built a faucet. And here's the problem: every time you shut it off, you crush that rubber and grind it against metal."
+  },
+  {
+   "beat": 8,
+   "start": 40.139,
+   "end": 48.07,
+   "frame_start": 1204,
+   "frame_end": 1442,
+   "text": "After years of twisting, it goes hard, cracks, and wears a groove. Now there's a gap, and fifty P-S-I pushes water through it, one drop at a time."
+  },
+  {
+   "beat": 9,
+   "start": 48.139,
+   "end": 52.661,
+   "frame_start": 1444,
+   "frame_end": 1580,
+   "text": "So you crank the handle tighter. That crushes the rubber even more. You just made it worse."
+  },
+  {
+   "beat": 10,
+   "start": 52.73,
+   "end": 64.0,
+   "frame_start": 1582,
+   "frame_end": 1920,
+   "text": "The fix? Stop squeezing rubber. Use two polished ceramic discs with holes in them. Line the holes up, water flows. Slide them apart, it stops. That's a cartridge, and it's why newer faucets rarely drip."
+  },
+  {
+   "beat": 11,
+   "start": 64.07,
+   "end": 70.261,
+   "frame_start": 1922,
+   "frame_end": 2108,
+   "text": "One drip a second is more than three thousand gallons a year. But wait, who's pushing all that water into your house in the first place?"
+  }
+ ],
+ "keywords": {
+  "Nonstop": 3.13,
+  "valve": 16.487,
+  "washer": 26.852,
+  "O-ring": 32.765,
+  "faucet": 34.643,
+  "P-S-I": 45.148,
+  "worse": 52.035,
+  "cartridge": 61.287
+ },
+ "words": [
+  {
+   "text": "Cut",
+   "start": 0.0,
+   "end": 0.139
+  },
+  {
+   "text": "open",
+   "start": 0.243,
+   "end": 0.348
+  },
+  {
+   "text": "the",
+   "start": 0.383,
+   "end": 0.417
+  },
+  {
+   "text": "pipe",
+   "start": 0.487,
+   "end": 0.626
+  },
+  {
+   "text": "behind",
+   "start": 0.696,
+   "end": 0.904
+  },
+  {
+   "text": "your",
+   "start": 0.974,
+   "end": 1.043
+  },
+  {
+   "text": "sink",
+   "start": 1.113,
+   "end": 1.391
+  },
+  {
+   "text": "and",
+   "start": 1.461,
+   "end": 1.53
+  },
+  {
+   "text": "water",
+   "start": 1.67,
+   "end": 1.948
+  },
+  {
+   "text": "blasts",
+   "start": 2.087,
+   "end": 2.504
+  },
+  {
+   "text": "out.",
+   "start": 2.574,
+   "end": 2.957
+  },
+  {
+   "text": "Nonstop.",
+   "start": 3.13,
+   "end": 3.826
+  },
+  {
+   "text": "It's",
+   "start": 4.035,
+   "end": 4.174
+  },
+  {
+   "text": "being",
+   "start": 4.243,
+   "end": 4.313
+  },
+  {
+   "text": "pushed",
+   "start": 4.452,
+   "end": 4.661
+  },
+  {
+   "text": "at",
+   "start": 4.696,
+   "end": 4.73
+  },
+  {
+   "text": "around",
+   "start": 4.835,
+   "end": 4.939
+  },
+  {
+   "text": "fifty",
+   "start": 5.078,
+   "end": 5.287
+  },
+  {
+   "text": "pounds",
+   "start": 5.426,
+   "end": 5.635
+  },
+  {
+   "text": "per",
+   "start": 5.704,
+   "end": 5.774
+  },
+  {
+   "text": "square",
+   "start": 5.913,
+   "end": 6.052
+  },
+  {
+   "text": "inch.",
+   "start": 6.122,
+   "end": 6.47
+  },
+  {
+   "text": "So",
+   "start": 6.609,
+   "end": 6.817
+  },
+  {
+   "text": "you",
+   "start": 6.957,
+   "end": 7.026
+  },
+  {
+   "text": "jam",
+   "start": 7.165,
+   "end": 7.304
+  },
+  {
+   "text": "a",
+   "start": 7.374,
+   "end": 7.409
+  },
+  {
+   "text": "metal",
+   "start": 7.443,
+   "end": 7.583
+  },
+  {
+   "text": "plug",
+   "start": 7.652,
+   "end": 7.791
+  },
+  {
+   "text": "in",
+   "start": 7.826,
+   "end": 7.861
+  },
+  {
+   "text": "the",
+   "start": 7.896,
+   "end": 7.93
+  },
+  {
+   "text": "hole.",
+   "start": 8.0,
+   "end": 8.348
+  },
+  {
+   "text": "It",
+   "start": 8.487,
+   "end": 8.557
+  },
+  {
+   "text": "stops.",
+   "start": 8.765,
+   "end": 9.113
+  },
+  {
+   "text": "But",
+   "start": 9.252,
+   "end": 9.322
+  },
+  {
+   "text": "now",
+   "start": 9.391,
+   "end": 9.6
+  },
+  {
+   "text": "you",
+   "start": 9.67,
+   "end": 9.739
+  },
+  {
+   "text": "can't",
+   "start": 9.809,
+   "end": 9.948
+  },
+  {
+   "text": "get",
+   "start": 10.052,
+   "end": 10.157
+  },
+  {
+   "text": "any",
+   "start": 10.261,
+   "end": 10.365
+  },
+  {
+   "text": "water",
+   "start": 10.435,
+   "end": 10.643
+  },
+  {
+   "text": "at",
+   "start": 10.678,
+   "end": 10.713
+  },
+  {
+   "text": "all.",
+   "start": 10.783,
+   "end": 11.339
+  },
+  {
+   "text": "So",
+   "start": 11.409,
+   "end": 11.478
+  },
+  {
+   "text": "you",
+   "start": 11.617,
+   "end": 11.687
+  },
+  {
+   "text": "put",
+   "start": 11.757,
+   "end": 11.826
+  },
+  {
+   "text": "the",
+   "start": 11.861,
+   "end": 11.896
+  },
+  {
+   "text": "plug",
+   "start": 11.965,
+   "end": 12.174
+  },
+  {
+   "text": "on",
+   "start": 12.243,
+   "end": 12.313
+  },
+  {
+   "text": "a",
+   "start": 12.348,
+   "end": 12.383
+  },
+  {
+   "text": "screw.",
+   "start": 12.452,
+   "end": 12.904
+  },
+  {
+   "text": "Turn",
+   "start": 13.009,
+   "end": 13.148
+  },
+  {
+   "text": "it",
+   "start": 13.217,
+   "end": 13.287
+  },
+  {
+   "text": "one",
+   "start": 13.357,
+   "end": 13.426
+  },
+  {
+   "text": "way,",
+   "start": 13.496,
+   "end": 13.774
+  },
+  {
+   "text": "the",
+   "start": 13.809,
+   "end": 13.843
+  },
+  {
+   "text": "plug",
+   "start": 13.913,
+   "end": 14.052
+  },
+  {
+   "text": "lifts.",
+   "start": 14.122,
+   "end": 14.574
+  },
+  {
+   "text": "Turn",
+   "start": 14.678,
+   "end": 14.817
+  },
+  {
+   "text": "it",
+   "start": 14.852,
+   "end": 14.887
+  },
+  {
+   "text": "back,",
+   "start": 14.957,
+   "end": 15.374
+  },
+  {
+   "text": "it",
+   "start": 15.409,
+   "end": 15.443
+  },
+  {
+   "text": "closes.",
+   "start": 15.513,
+   "end": 16.07
+  },
+  {
+   "text": "That's",
+   "start": 16.209,
+   "end": 16.383
+  },
+  {
+   "text": "a",
+   "start": 16.417,
+   "end": 16.452
+  },
+  {
+   "text": "valve.",
+   "start": 16.487,
+   "end": 16.974
+  },
+  {
+   "text": "But",
+   "start": 17.113,
+   "end": 17.183
+  },
+  {
+   "text": "it",
+   "start": 17.252,
+   "end": 17.322
+  },
+  {
+   "text": "still",
+   "start": 17.391,
+   "end": 17.6
+  },
+  {
+   "text": "leaks.",
+   "start": 17.739,
+   "end": 18.226
+  },
+  {
+   "text": "Metal",
+   "start": 18.365,
+   "end": 18.574
+  },
+  {
+   "text": "on",
+   "start": 18.643,
+   "end": 18.713
+  },
+  {
+   "text": "metal",
+   "start": 18.783,
+   "end": 18.991
+  },
+  {
+   "text": "never",
+   "start": 19.13,
+   "end": 19.339
+  },
+  {
+   "text": "fits",
+   "start": 19.409,
+   "end": 19.548
+  },
+  {
+   "text": "perfectly,",
+   "start": 19.617,
+   "end": 20.174
+  },
+  {
+   "text": "and",
+   "start": 20.243,
+   "end": 20.313
+  },
+  {
+   "text": "water",
+   "start": 20.383,
+   "end": 20.591
+  },
+  {
+   "text": "finds",
+   "start": 20.661,
+   "end": 20.939
+  },
+  {
+   "text": "every",
+   "start": 21.009,
+   "end": 21.287
+  },
+  {
+   "text": "scratch.",
+   "start": 21.357,
+   "end": 21.913
+  },
+  {
+   "text": "So",
+   "start": 22.052,
+   "end": 22.261
+  },
+  {
+   "text": "you",
+   "start": 22.33,
+   "end": 22.47
+  },
+  {
+   "text": "add",
+   "start": 22.539,
+   "end": 22.609
+  },
+  {
+   "text": "a",
+   "start": 22.643,
+   "end": 22.678
+  },
+  {
+   "text": "soft",
+   "start": 22.748,
+   "end": 22.957
+  },
+  {
+   "text": "rubber",
+   "start": 23.026,
+   "end": 23.235
+  },
+  {
+   "text": "disc",
+   "start": 23.304,
+   "end": 23.583
+  },
+  {
+   "text": "on",
+   "start": 23.617,
+   "end": 23.652
+  },
+  {
+   "text": "the",
+   "start": 23.687,
+   "end": 23.722
+  },
+  {
+   "text": "end",
+   "start": 23.791,
+   "end": 23.93
+  },
+  {
+   "text": "of",
+   "start": 23.965,
+   "end": 24.0
+  },
+  {
+   "text": "the",
+   "start": 24.046,
+   "end": 24.093
+  },
+  {
+   "text": "plug.",
+   "start": 24.139,
+   "end": 24.417
+  },
+  {
+   "text": "It",
+   "start": 24.626,
+   "end": 24.696
+  },
+  {
+   "text": "squishes",
+   "start": 24.765,
+   "end": 25.113
+  },
+  {
+   "text": "into",
+   "start": 25.183,
+   "end": 25.252
+  },
+  {
+   "text": "the",
+   "start": 25.322,
+   "end": 25.357
+  },
+  {
+   "text": "gaps",
+   "start": 25.391,
+   "end": 25.67
+  },
+  {
+   "text": "and",
+   "start": 25.739,
+   "end": 25.809
+  },
+  {
+   "text": "seals.",
+   "start": 25.948,
+   "end": 26.435
+  },
+  {
+   "text": "That's",
+   "start": 26.574,
+   "end": 26.737
+  },
+  {
+   "text": "a",
+   "start": 26.759,
+   "end": 26.783
+  },
+  {
+   "text": "washer.",
+   "start": 26.852,
+   "end": 27.374
+  },
+  {
+   "text": "Now",
+   "start": 27.548,
+   "end": 27.757
+  },
+  {
+   "text": "water",
+   "start": 27.896,
+   "end": 28.104
+  },
+  {
+   "text": "sneaks",
+   "start": 28.174,
+   "end": 28.452
+  },
+  {
+   "text": "up",
+   "start": 28.522,
+   "end": 28.591
+  },
+  {
+   "text": "the",
+   "start": 28.626,
+   "end": 28.661
+  },
+  {
+   "text": "screw",
+   "start": 28.696,
+   "end": 29.009
+  },
+  {
+   "text": "and",
+   "start": 29.078,
+   "end": 29.148
+  },
+  {
+   "text": "out",
+   "start": 29.217,
+   "end": 29.357
+  },
+  {
+   "text": "around",
+   "start": 29.461,
+   "end": 29.565
+  },
+  {
+   "text": "the",
+   "start": 29.6,
+   "end": 29.635
+  },
+  {
+   "text": "handle.",
+   "start": 29.704,
+   "end": 30.261
+  },
+  {
+   "text": "So",
+   "start": 30.33,
+   "end": 30.47
+  },
+  {
+   "text": "you",
+   "start": 30.539,
+   "end": 30.609
+  },
+  {
+   "text": "wrap",
+   "start": 30.678,
+   "end": 30.817
+  },
+  {
+   "text": "a",
+   "start": 30.887,
+   "end": 30.957
+  },
+  {
+   "text": "rubber",
+   "start": 31.026,
+   "end": 31.235
+  },
+  {
+   "text": "ring",
+   "start": 31.304,
+   "end": 31.513
+  },
+  {
+   "text": "around",
+   "start": 31.617,
+   "end": 31.722
+  },
+  {
+   "text": "the",
+   "start": 31.791,
+   "end": 31.826
+  },
+  {
+   "text": "stem.",
+   "start": 31.861,
+   "end": 32.209
+  },
+  {
+   "text": "That's",
+   "start": 32.417,
+   "end": 32.591
+  },
+  {
+   "text": "an",
+   "start": 32.626,
+   "end": 32.696
+  },
+  {
+   "text": "O-ring.",
+   "start": 32.765,
+   "end": 33.322
+  },
+  {
+   "text": "Congrats,",
+   "start": 33.461,
+   "end": 34.087
+  },
+  {
+   "text": "you",
+   "start": 34.157,
+   "end": 34.226
+  },
+  {
+   "text": "just",
+   "start": 34.296,
+   "end": 34.365
+  },
+  {
+   "text": "built",
+   "start": 34.435,
+   "end": 34.504
+  },
+  {
+   "text": "a",
+   "start": 34.574,
+   "end": 34.609
+  },
+  {
+   "text": "faucet.",
+   "start": 34.643,
+   "end": 35.061
+  },
+  {
+   "text": "And",
+   "start": 35.339,
+   "end": 35.478
+  },
+  {
+   "text": "here's",
+   "start": 35.548,
+   "end": 35.687
+  },
+  {
+   "text": "the",
+   "start": 35.757,
+   "end": 35.826
+  },
+  {
+   "text": "problem:",
+   "start": 36.035,
+   "end": 36.452
+  },
+  {
+   "text": "every",
+   "start": 36.522,
+   "end": 36.661
+  },
+  {
+   "text": "time",
+   "start": 36.73,
+   "end": 36.87
+  },
+  {
+   "text": "you",
+   "start": 36.939,
+   "end": 37.009
+  },
+  {
+   "text": "shut",
+   "start": 37.043,
+   "end": 37.148
+  },
+  {
+   "text": "it",
+   "start": 37.183,
+   "end": 37.217
+  },
+  {
+   "text": "off,",
+   "start": 37.287,
+   "end": 37.565
+  },
+  {
+   "text": "you",
+   "start": 37.635,
+   "end": 37.704
+  },
+  {
+   "text": "crush",
+   "start": 37.774,
+   "end": 38.052
+  },
+  {
+   "text": "that",
+   "start": 38.122,
+   "end": 38.191
+  },
+  {
+   "text": "rubber",
+   "start": 38.261,
+   "end": 38.539
+  },
+  {
+   "text": "and",
+   "start": 38.643,
+   "end": 38.748
+  },
+  {
+   "text": "grind",
+   "start": 38.817,
+   "end": 39.096
+  },
+  {
+   "text": "it",
+   "start": 39.13,
+   "end": 39.165
+  },
+  {
+   "text": "against",
+   "start": 39.304,
+   "end": 39.443
+  },
+  {
+   "text": "metal.",
+   "start": 39.583,
+   "end": 40.0
+  },
+  {
+   "text": "After",
+   "start": 40.139,
+   "end": 40.278
+  },
+  {
+   "text": "years",
+   "start": 40.348,
+   "end": 40.557
+  },
+  {
+   "text": "of",
+   "start": 40.626,
+   "end": 40.696
+  },
+  {
+   "text": "twisting,",
+   "start": 40.73,
+   "end": 41.183
+  },
+  {
+   "text": "it",
+   "start": 41.252,
+   "end": 41.287
+  },
+  {
+   "text": "goes",
+   "start": 41.322,
+   "end": 41.461
+  },
+  {
+   "text": "hard,",
+   "start": 41.53,
+   "end": 42.017
+  },
+  {
+   "text": "cracks,",
+   "start": 42.087,
+   "end": 42.504
+  },
+  {
+   "text": "and",
+   "start": 42.574,
+   "end": 42.643
+  },
+  {
+   "text": "wears",
+   "start": 42.678,
+   "end": 42.852
+  },
+  {
+   "text": "a",
+   "start": 42.922,
+   "end": 42.957
+  },
+  {
+   "text": "groove.",
+   "start": 42.991,
+   "end": 43.548
+  },
+  {
+   "text": "Now",
+   "start": 43.687,
+   "end": 43.826
+  },
+  {
+   "text": "there's",
+   "start": 43.861,
+   "end": 43.965
+  },
+  {
+   "text": "a",
+   "start": 44.035,
+   "end": 44.104
+  },
+  {
+   "text": "gap,",
+   "start": 44.243,
+   "end": 44.522
+  },
+  {
+   "text": "and",
+   "start": 44.626,
+   "end": 44.73
+  },
+  {
+   "text": "fifty",
+   "start": 44.765,
+   "end": 45.009
+  },
+  {
+   "text": "P-S-I",
+   "start": 45.148,
+   "end": 45.704
+  },
+  {
+   "text": "pushes",
+   "start": 45.774,
+   "end": 46.052
+  },
+  {
+   "text": "water",
+   "start": 46.122,
+   "end": 46.33
+  },
+  {
+   "text": "through",
+   "start": 46.4,
+   "end": 46.539
+  },
+  {
+   "text": "it,",
+   "start": 46.609,
+   "end": 46.887
+  },
+  {
+   "text": "one",
+   "start": 46.957,
+   "end": 47.096
+  },
+  {
+   "text": "drop",
+   "start": 47.165,
+   "end": 47.374
+  },
+  {
+   "text": "at",
+   "start": 47.409,
+   "end": 47.443
+  },
+  {
+   "text": "a",
+   "start": 47.478,
+   "end": 47.513
+  },
+  {
+   "text": "time.",
+   "start": 47.652,
+   "end": 48.07
+  },
+  {
+   "text": "So",
+   "start": 48.139,
+   "end": 48.278
+  },
+  {
+   "text": "you",
+   "start": 48.348,
+   "end": 48.487
+  },
+  {
+   "text": "crank",
+   "start": 48.557,
+   "end": 48.765
+  },
+  {
+   "text": "the",
+   "start": 48.8,
+   "end": 48.835
+  },
+  {
+   "text": "handle",
+   "start": 48.904,
+   "end": 49.113
+  },
+  {
+   "text": "tighter.",
+   "start": 49.217,
+   "end": 49.67
+  },
+  {
+   "text": "That",
+   "start": 49.774,
+   "end": 49.878
+  },
+  {
+   "text": "crushes",
+   "start": 49.948,
+   "end": 50.226
+  },
+  {
+   "text": "the",
+   "start": 50.296,
+   "end": 50.365
+  },
+  {
+   "text": "rubber",
+   "start": 50.435,
+   "end": 50.643
+  },
+  {
+   "text": "even",
+   "start": 50.783,
+   "end": 50.922
+  },
+  {
+   "text": "more.",
+   "start": 51.061,
+   "end": 51.409
+  },
+  {
+   "text": "You",
+   "start": 51.478,
+   "end": 51.548
+  },
+  {
+   "text": "just",
+   "start": 51.617,
+   "end": 51.687
+  },
+  {
+   "text": "made",
+   "start": 51.757,
+   "end": 51.826
+  },
+  {
+   "text": "it",
+   "start": 51.896,
+   "end": 51.965
+  },
+  {
+   "text": "worse.",
+   "start": 52.035,
+   "end": 52.661
+  },
+  {
+   "text": "The",
+   "start": 52.73,
+   "end": 52.8
+  },
+  {
+   "text": "fix?",
+   "start": 52.974,
+   "end": 53.426
+  },
+  {
+   "text": "Stop",
+   "start": 53.496,
+   "end": 53.774
+  },
+  {
+   "text": "squeezing",
+   "start": 53.843,
+   "end": 54.261
+  },
+  {
+   "text": "rubber.",
+   "start": 54.33,
+   "end": 54.887
+  },
+  {
+   "text": "Use",
+   "start": 54.957,
+   "end": 55.165
+  },
+  {
+   "text": "two",
+   "start": 55.235,
+   "end": 55.443
+  },
+  {
+   "text": "polished",
+   "start": 55.513,
+   "end": 55.791
+  },
+  {
+   "text": "ceramic",
+   "start": 55.861,
+   "end": 56.139
+  },
+  {
+   "text": "discs",
+   "start": 56.209,
+   "end": 56.487
+  },
+  {
+   "text": "with",
+   "start": 56.557,
+   "end": 56.626
+  },
+  {
+   "text": "holes",
+   "start": 56.73,
+   "end": 56.835
+  },
+  {
+   "text": "in",
+   "start": 56.87,
+   "end": 56.904
+  },
+  {
+   "text": "them.",
+   "start": 56.974,
+   "end": 57.322
+  },
+  {
+   "text": "Line",
+   "start": 57.391,
+   "end": 57.53
+  },
+  {
+   "text": "the",
+   "start": 57.565,
+   "end": 57.6
+  },
+  {
+   "text": "holes",
+   "start": 57.67,
+   "end": 57.809
+  },
+  {
+   "text": "up,",
+   "start": 57.878,
+   "end": 58.226
+  },
+  {
+   "text": "water",
+   "start": 58.296,
+   "end": 58.504
+  },
+  {
+   "text": "flows.",
+   "start": 58.574,
+   "end": 59.13
+  },
+  {
+   "text": "Slide",
+   "start": 59.235,
+   "end": 59.339
+  },
+  {
+   "text": "them",
+   "start": 59.374,
+   "end": 59.409
+  },
+  {
+   "text": "apart,",
+   "start": 59.478,
+   "end": 59.965
+  },
+  {
+   "text": "it",
+   "start": 60.035,
+   "end": 60.104
+  },
+  {
+   "text": "stops.",
+   "start": 60.174,
+   "end": 60.8
+  },
+  {
+   "text": "That's",
+   "start": 60.87,
+   "end": 61.078
+  },
+  {
+   "text": "a",
+   "start": 61.148,
+   "end": 61.217
+  },
+  {
+   "text": "cartridge,",
+   "start": 61.287,
+   "end": 61.843
+  },
+  {
+   "text": "and",
+   "start": 61.878,
+   "end": 61.913
+  },
+  {
+   "text": "it's",
+   "start": 61.983,
+   "end": 62.122
+  },
+  {
+   "text": "why",
+   "start": 62.191,
+   "end": 62.261
+  },
+  {
+   "text": "newer",
+   "start": 62.33,
+   "end": 62.539
+  },
+  {
+   "text": "faucets",
+   "start": 62.609,
+   "end": 63.026
+  },
+  {
+   "text": "rarely",
+   "start": 63.061,
+   "end": 63.374
+  },
+  {
+   "text": "drip.",
+   "start": 63.409,
+   "end": 64.0
+  },
+  {
+   "text": "One",
+   "start": 64.07,
+   "end": 64.139
+  },
+  {
+   "text": "drip",
+   "start": 64.209,
+   "end": 64.348
+  },
+  {
+   "text": "a",
+   "start": 64.417,
+   "end": 64.487
+  },
+  {
+   "text": "second",
+   "start": 64.661,
+   "end": 64.835
+  },
+  {
+   "text": "is",
+   "start": 64.904,
+   "end": 64.974
+  },
+  {
+   "text": "more",
+   "start": 65.043,
+   "end": 65.113
+  },
+  {
+   "text": "than",
+   "start": 65.217,
+   "end": 65.322
+  },
+  {
+   "text": "three",
+   "start": 65.391,
+   "end": 65.6
+  },
+  {
+   "text": "thousand",
+   "start": 65.809,
+   "end": 66.087
+  },
+  {
+   "text": "gallons",
+   "start": 66.226,
+   "end": 66.504
+  },
+  {
+   "text": "a",
+   "start": 66.574,
+   "end": 66.643
+  },
+  {
+   "text": "year.",
+   "start": 66.783,
+   "end": 67.2
+  },
+  {
+   "text": "But",
+   "start": 67.235,
+   "end": 67.27
+  },
+  {
+   "text": "wait,",
+   "start": 67.339,
+   "end": 67.757
+  },
+  {
+   "text": "who's",
+   "start": 67.826,
+   "end": 68.035
+  },
+  {
+   "text": "pushing",
+   "start": 68.104,
+   "end": 68.313
+  },
+  {
+   "text": "all",
+   "start": 68.348,
+   "end": 68.383
+  },
+  {
+   "text": "that",
+   "start": 68.452,
+   "end": 68.591
+  },
+  {
+   "text": "water",
+   "start": 68.696,
+   "end": 68.8
+  },
+  {
+   "text": "into",
+   "start": 68.87,
+   "end": 68.939
+  },
+  {
+   "text": "your",
+   "start": 69.009,
+   "end": 69.078
+  },
+  {
+   "text": "house",
+   "start": 69.148,
+   "end": 69.287
+  },
+  {
+   "text": "in",
+   "start": 69.322,
+   "end": 69.357
+  },
+  {
+   "text": "the",
+   "start": 69.426,
+   "end": 69.496
+  },
+  {
+   "text": "first",
+   "start": 69.6,
+   "end": 69.704
+  },
+  {
+   "text": "place?",
+   "start": 69.878,
+   "end": 70.261
+  }
+ ]
+}

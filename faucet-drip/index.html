@@ -3,17 +3,40 @@
 <head>
 <meta charset="utf-8">
 <style>
-  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
-  #wrap { position: relative; width: 1080px; height: 1920px; }
+  @font-face { font-family: "WS"; src: url("fonts/Inter-Black.otf"); font-weight: 900; }
+  @font-face { font-family: "WS"; src: url("fonts/Inter-ExtraBold.otf"); font-weight: 800; }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "WS", sans-serif; }
+  #wrap { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
   canvas { position: absolute; inset: 0; }
   .label {
-    position: absolute; transform-origin: 0% 50%; opacity: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 800; letter-spacing: 3px;
-    font-size: 54px; color: #fff; background: rgba(20,17,15,0.88); padding: 14px 30px; border-radius: 40px;
+    position: absolute; transform-origin: 50% 50%; opacity: 0; font-weight: 900; letter-spacing: 3px;
+    font-size: 58px; color: #fff; background: rgba(20,17,15,0.9); padding: 14px 32px; border-radius: 44px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.35); white-space: nowrap;
   }
   .leader { position: absolute; height: 5px; background: rgba(255,255,255,0.95); transform-origin: 0% 50%; opacity: 0; border-radius: 3px; box-shadow: 0 0 8px rgba(0,0,0,0.5); }
   .dot { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #14110f; border: 5px solid #fff; opacity: 0; }
+  .badge {
+    position: absolute; left: 540px; top: 330px; transform-origin: 50% 50%; opacity: 0; white-space: nowrap;
+    font-weight: 900; font-size: 92px; letter-spacing: 2px; color: #fff; padding: 18px 44px; border-radius: 28px;
+    background: rgba(20,17,15,0.88); box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .badge small { display: block; font-size: 40px; font-weight: 800; letter-spacing: 4px; opacity: 0.85; text-align: center; margin-top: 2px; }
+  .badge.blue { background: rgba(18,92,200,0.92); }
+  .badge.red { background: rgba(190,32,24,0.92); }
+  .ring { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 7px solid #ffd23f; opacity: 0; box-shadow: 0 0 18px rgba(0,0,0,0.5), inset 0 0 12px rgba(0,0,0,0.3); }
+  .ringtxt { position: absolute; font-weight: 900; font-size: 50px; color: #ffd23f; letter-spacing: 3px; opacity: 0; -webkit-text-stroke: 10px #000; paint-order: stroke fill; white-space: nowrap; }
+  .xmark { position: absolute; width: 230px; height: 230px; margin: -115px 0 0 -115px; opacity: 0; }
+  .xmark:before, .xmark:after { content: ""; position: absolute; left: 0; top: 103px; width: 230px; height: 24px; background: #e0281c; border-radius: 12px; box-shadow: 0 0 0 6px #000; }
+  .xmark:before { transform: rotate(45deg); } .xmark:after { transform: rotate(-45deg); }
+  #vig { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at center, rgba(200,20,10,0) 45%, rgba(200,20,10,0.55) 100%); }
+  #flash { position: absolute; inset: 0; opacity: 0; background: #fff; }
+  #black { position: absolute; inset: 0; opacity: 0; background: #000; }
+  #cap { position: absolute; left: 60px; right: 60px; top: 1290px; text-align: center; line-height: 1.12;
+    font-weight: 900; font-size: 84px; text-transform: uppercase; color: #fff; -webkit-text-stroke: 16px #000; paint-order: stroke fill;
+    text-shadow: 0 6px 14px rgba(0,0,0,0.55); }
+  #cap span { display: inline-block; margin: 0 10px; }
+  #cap span.on { color: #ffd23f; transform: scale(1.08); }
+  #q { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-weight: 900; font-size: 420px; color: #fff; opacity: 0; -webkit-text-stroke: 24px #000; paint-order: stroke fill; }
 </style>
 <script type="importmap">
 { "imports": {
@@ -25,9 +48,12 @@
 </head>
 <body>
 <div id="wrap">
-  <div class="leader" id="leader"></div>
-  <div class="dot" id="dot"></div>
-  <div class="label" id="label">VALVE</div>
+  <div id="vig"></div>
+  <div id="ui"></div>
+  <div id="cap"></div>
+  <div id="q">?</div>
+  <div id="flash"></div>
+  <div id="black"></div>
 </div>
 <script type="module">
 import * as THREE from 'three';
@@ -39,12 +65,28 @@ import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { gsap } from 'gsap';
 
+let ready; window.ready = new Promise((r) => (ready = r));
 const Q = new URLSearchParams(location.search);
 const OPT = { ao: Q.get('ao') !== '0', dof: Q.get('dof') !== '0', aperture: +(Q.get('ap') || 0.015) };
-const W = 1080, H = 1920, FPS = 30, DURATION = 8.0;
+const W = 1080, H = 1920, FPS = 30;
 
+// ---------- voice-over timing (words already scaled to the 1.15x audio) ----------
+const TIMING = await fetch('audio/faucet_vo_timing.json').then((r) => r.json());
+const WORDS = TIMING.words;
+const DURATION = Math.ceil(TIMING.duration * FPS) / FPS;
+const norm = (s) => s.toLowerCase().replace(/[^a-z0-9'-]/g, '');
+// start time of the n-th occurrence of a word
+function w(word, n = 1) {
+  let k = 0;
+  for (const x of WORDS) if (norm(x.text) === norm(word) && ++k === n) return x.start;
+  throw new Error('word not found: ' + word + ' #' + n);
+}
+const wEnd = (word, n = 1) => { let k = 0; for (const x of WORDS) if (norm(x.text) === norm(word) && ++k === n) return x.end; };
+
+// ---------- renderer / scene ----------
 const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
 renderer.setPixelRatio(1); renderer.setSize(W, H);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -53,10 +95,8 @@ renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
 document.getElementById('wrap').prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(2 * Math.atan(18 / 100) * 180 / Math.PI, W / H, 0.01, 20);
-camera.position.set(0.66, 1.128, 0.16); camera.lookAt(0, 1.128, 0.16); camera.updateMatrixWorld();
+const camera = new THREE.PerspectiveCamera(2 * Math.atan(18 / 100) * 180 / Math.PI, W / H, 0.005, 20);
 
-// ---------- lighting: studio HDRI for reflections + a soft key that casts shadows ----------
 const key = new THREE.DirectionalLight(0xfff1e0, 2.6);
 key.position.set(0.55, 1.75, 0.55); key.target.position.set(0, 1.1, 0.15);
 key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 6; key.shadow.bias = -0.0002; key.shadow.normalBias = 0.0004;
@@ -74,49 +114,139 @@ function tiled(name, rx, ry, srgb = false) {
 }
 const tileMat = (rx, ry) => new THREE.MeshStandardMaterial({
   map: tiled('tiles_diff.jpg', rx, ry, true), normalMap: tiled('tiles_nor.jpg', rx, ry), roughnessMap: tiled('tiles_rough.jpg', rx, ry),
-  normalScale: new THREE.Vector2(1, 1), roughness: 1, envMapIntensity: 0.8,
+  roughness: 1, envMapIntensity: 0.8,
 });
 const MAT = {
-  // real cutaway display models are painted on the cut faces
-  SectionFace: new THREE.MeshPhysicalMaterial({ color: 0xa8321f, roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.3 }),
-  Brass: new THREE.MeshPhysicalMaterial({ color: 0xe6b866, metalness: 1, roughness: 0.27 }),
-  BrassScratched: new THREE.MeshPhysicalMaterial({ color: 0xdcae5c, metalness: 1, roughness: 0.38 }),
-  Copper: new THREE.MeshPhysicalMaterial({ color: 0xe39a6e, metalness: 1, roughness: 0.3 }),
-  Chrome: new THREE.MeshPhysicalMaterial({ color: 0xf2f3f5, metalness: 1, roughness: 0.07 }),
-  RubberBlack: new THREE.MeshStandardMaterial({ color: 0x1b1b1b, roughness: 0.7 }),
+  SectionFace: new THREE.MeshPhysicalMaterial({ color: 0xa8321f, roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.3, side: THREE.DoubleSide }),
+  Brass: new THREE.MeshPhysicalMaterial({ color: 0xe6b866, metalness: 1, roughness: 0.27, side: THREE.DoubleSide }),
+  BrassScratched: new THREE.MeshPhysicalMaterial({ color: 0xdcae5c, metalness: 1, roughness: 0.38, side: THREE.DoubleSide }),
+  Copper: new THREE.MeshPhysicalMaterial({ color: 0xe39a6e, metalness: 1, roughness: 0.3, side: THREE.DoubleSide }),
+  Chrome: new THREE.MeshPhysicalMaterial({ color: 0xf2f3f5, metalness: 1, roughness: 0.07, side: THREE.DoubleSide }),
+  Rubber: new THREE.MeshPhysicalMaterial({ color: 0x1c1c1e, roughness: 0.62, sheen: 0.4, sheenRoughness: 0.6, side: THREE.DoubleSide }),
+  RubberCut: new THREE.MeshPhysicalMaterial({ color: 0x2a2a2d, roughness: 0.8, side: THREE.DoubleSide }),
+  Ceramic: new THREE.MeshPhysicalMaterial({ color: 0xf1eee6, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.05, sheen: 0 }),
+  CeramicB: new THREE.MeshPhysicalMaterial({ color: 0xe4e0d6, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.06 }),
   Water: new THREE.MeshPhysicalMaterial({
     color: 0xd8efff, metalness: 0, roughness: 0.03, transmission: 1, ior: 1.33, thickness: 0.006,
     attenuationColor: new THREE.Color(0x3d9bff), attenuationDistance: 0.02, specularIntensity: 1, envMapIntensity: 1.3,
-    emissive: new THREE.Color(0x0b4fb3), emissiveIntensity: 0.35,
+    emissive: new THREE.Color(0x0b4fb3), emissiveIntensity: 0.35, side: THREE.DoubleSide,
   }),
+  Spray: new THREE.MeshStandardMaterial({ color: 0xbfe2ff, roughness: 0.04, metalness: 0.1, envMapIntensity: 2.2, emissive: 0x1a5fc4, emissiveIntensity: 0.25, transparent: true, opacity: 0.92 }),
 };
+const washerMat = MAT.Rubber.clone(); washerMat.emissive = new THREE.Color(0x000000);
+const washerCutMat = MAT.RubberCut.clone();
 
-// ---------- set: tiled bathroom wall with the pipe, tiled side wall behind ----------
+// A turned (lathe) part, cut in half on x<=0 like the rest of the cutaway, with painted section faces.
+// profile: closed list of [r, y] points, counter-clockwise.
+function turned(profile, mat, cutMat = MAT.SectionFace, segs = 64, full = false) {
+  const g = new THREE.Group();
+  const pts = profile.map(([r, y]) => new THREE.Vector2(r, y));
+  const parts = [];
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    if (a.distanceTo(b) < 1e-7) continue;
+    const lg = full ? new THREE.LatheGeometry([a, b], segs * 2) : new THREE.LatheGeometry([a, b], segs, Math.PI, Math.PI);
+    parts.push(lg.toNonIndexed());
+  }
+  const body = new THREE.Mesh(mergeGeometries(parts), mat); body.castShadow = body.receiveShadow = true; g.add(body);
+  if (full) return g;
+  const shape = new THREE.Shape(pts);
+  for (const s of [-1, 1]) {
+    const f = new THREE.Mesh(new THREE.ShapeGeometry(shape), cutMat);
+    f.rotation.y = -s * Math.PI / 2; f.receiveShadow = true; g.add(f);
+  }
+  return g;
+}
+const circleProfile = (R, r, n = 20) => Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [R + r * Math.cos(a), r * Math.sin(a)]; });
+
+// ---------- set ----------
 const wall = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.6, 0.0127), tileMat(10.6, 8.6));
 wall.position.set(0, 1.3, 0.0127 / 2); wall.receiveShadow = true; scene.add(wall);
 const side = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 2.6), tileMat(10, 8.6));
 side.rotation.y = Math.PI / 2; side.position.set(-0.9, 1.3, 1.5); side.receiveShadow = true; scene.add(side);
-// chrome wall flange around the pipe
 const flange = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.031, 0.004, 64), MAT.Chrome);
 flange.rotation.x = Math.PI / 2; flange.position.set(0, 1.08, 0.0147); flange.castShadow = flange.receiveShadow = true; scene.add(flange);
 
-// ---------- stream: glassy water with ripples ----------
-const wobble = { value: 0 };
-const streamMat = MAT.Water.clone(); streamMat.transmission = 0.92; streamMat.attenuationDistance = 0.014; streamMat.thickness = 0.008;
-streamMat.onBeforeCompile = (sh) => {
-  sh.uniforms.uT = wobble;
-  sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace('#include <begin_vertex>',
-    `vec3 transformed = position;
-     float a = atan(position.z, position.x);
-     float w = sin(position.y * 95.0 + uT * 19.0 + a * 2.0) * 0.00050 + sin(position.y * 230.0 - uT * 33.0 - a * 3.0) * 0.00022;
-     transformed.xz += normalize(position.xz + 1e-6) * w * smoothstep(0.0, -0.02, position.y);`);
-};
+// ---------- shader wobble for flowing water ----------
+const uT = { value: 0 };
+function wobbly(mat, kind) {
+  const m = mat.clone();
+  m.onBeforeCompile = (sh) => {
+    sh.uniforms.uT = uT;
+    const body = kind === 'jet'
+      ? `vec3 transformed = position; float s = position.z; float a = atan(position.y, position.x);
+         float w = sin(s * 70.0 - uT * 46.0 + a * 3.0) * 0.0013 + sin(s * 170.0 - uT * 83.0 - a * 2.0) * 0.0006;
+         transformed.xy += normalize(position.xy + 1e-6) * w * smoothstep(0.0, 0.04, s);
+         transformed.y -= s * s * 0.06;`
+      : `vec3 transformed = position; float a = atan(position.z, position.x);
+         float w = sin(position.y * 95.0 + uT * 19.0 + a * 2.0) * 0.00050 + sin(position.y * 230.0 - uT * 33.0 - a * 3.0) * 0.00022;
+         transformed.xz += normalize(position.xz + 1e-6) * w * smoothstep(0.0, -0.02, position.y);`;
+    sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace('#include <begin_vertex>', body);
+  };
+  return m;
+}
+
+// faucet stream (from the spout)
+const streamMat = wobbly(MAT.Water, 'stream'); streamMat.transmission = 0.92; streamMat.attenuationDistance = 0.014; streamMat.thickness = 0.008;
 const streamGeo = new THREE.CylinderGeometry(0.0045, 0.0036, 0.30, 48, 160, false); streamGeo.translate(0, -0.15, 0);
 const stream = new THREE.Mesh(streamGeo, streamMat); stream.castShadow = true;
 const streamRig = new THREE.Group(); streamRig.add(stream);
 streamRig.position.set(0, 1.062, 0.215); streamRig.scale.set(1, 0.001, 1); streamRig.visible = false; scene.add(streamRig);
 
-// ---------- post: ambient occlusion, depth of field, anti-aliasing ----------
+// beat 1: jet blasting out of the cut pipe
+const jetGeo = new THREE.CylinderGeometry(0.0135, 0.0087, 0.42, 48, 200, true); jetGeo.translate(0, 0.21, 0); jetGeo.rotateX(Math.PI / 2);
+const jetMat = wobbly(MAT.Water, 'jet'); jetMat.transmission = 0.7; jetMat.thickness = 0.012; jetMat.attenuationDistance = 0.03; jetMat.color.set(0xeef8ff); jetMat.roughness = 0.08;
+const jet = new THREE.Mesh(jetGeo, jetMat); jet.castShadow = true;
+const jetRig = new THREE.Group(); jetRig.add(jet); jetRig.position.set(0, 1.080, 0.100); scene.add(jetRig);
+const SPRAY_N = 240;
+const spray = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 12, 8), MAT.Spray, SPRAY_N);
+spray.instanceMatrix.setUsage(THREE.DynamicDrawUsage); spray.frustumCulled = false; scene.add(spray);
+const jetState = { p: 1 };
+
+// beat 2: a plain metal plug jammed into the pipe (lathe axis points along -z into the pipe)
+const plug = turned([[0, 0], [0.0118, 0], [0.012, 0.0005], [0.012, 0.0045], [0.0118, 0.005], [0.0086, 0.005], [0.0086, 0.022], [0.0082, 0.0225], [0, 0.0225]], MAT.Brass);
+const plugRig = new THREE.Group(); plugRig.add(plug); plug.rotation.x = -Math.PI / 2;
+plugRig.position.set(0, 1.080, 0.30); plugRig.visible = false; scene.add(plugRig);
+
+// drips at the spout tip
+const TIP = new THREE.Vector3(0, 1.060, 0.215);
+const dropGeo = new THREE.SphereGeometry(1, 24, 16);
+const drops = Array.from({ length: 6 }, () => { const m = new THREE.Mesh(dropGeo, MAT.Water); m.visible = false; m.castShadow = true; scene.add(m); return m; });
+const DRIPS = [];
+const dripRun = (t0, t1, every) => { for (let t = t0; t < t1; t += every) DRIPS.push(t); };
+
+// ---------- cartridge stage (beat 10) ----------
+const cart = new THREE.Group(); cart.position.set(0, 1.12, 0.16); cart.visible = false; scene.add(cart);
+function sector(r0, r1, a, span) {
+  const p = new THREE.Path();
+  p.absarc(0, 0, r1, a - span / 2, a + span / 2, false); p.absarc(0, 0, r0, a + span / 2, a - span / 2, true); p.closePath();
+  return p;
+}
+function discGeo() {
+  const s = new THREE.Shape(); s.absarc(0, 0, 0.022, 0, Math.PI * 2, false);
+  s.holes.push(sector(0.0075, 0.0165, 0, 1.0), sector(0.0075, 0.0165, Math.PI, 1.0));
+  const g = new THREE.ExtrudeGeometry(s, { depth: 0.0032, bevelEnabled: true, bevelThickness: 0.0004, bevelSize: 0.0004, bevelSegments: 3, curveSegments: 64 });
+  g.rotateX(-Math.PI / 2); return g;
+}
+function columnGeo(len) {
+  const parts = [0, Math.PI].map((a) => {
+    const s = new THREE.Shape(sector(0.0078, 0.0162, a, 0.94).getPoints(32));
+    const g = new THREE.ExtrudeGeometry(s, { depth: len, bevelEnabled: false, curveSegments: 32 }); g.rotateX(-Math.PI / 2); return g;
+  });
+  return mergeGeometries(parts);
+}
+const dTop = new THREE.Group(), dBot = new THREE.Group(); cart.add(dTop, dBot);
+const discT = new THREE.Mesh(discGeo(), MAT.Ceramic), discB = new THREE.Mesh(discGeo(), MAT.CeramicB);
+discT.castShadow = discT.receiveShadow = discB.castShadow = discB.receiveShadow = true;
+dTop.add(discT); dBot.add(discB);
+const colTop = new THREE.Mesh(columnGeo(0.007), MAT.Water); colTop.position.y = 0.0036; dTop.add(colTop);
+const colBot = new THREE.Mesh(columnGeo(0.06), MAT.Water); colBot.geometry.translate(0, -0.06, 0); colBot.position.y = -0.0004; dBot.add(colBot);
+const cartState = { top: 0.024, bot: -0.024, rot: -1.5708, inT: 0, flow: 0, drain: 0 };
+const housing = turned([[0.0245, -0.014], [0.0268, -0.014], [0.0268, 0.03], [0.0062, 0.03], [0.0062, 0.026], [0.0245, 0.026]], MAT.Brass);
+const hStem = turned([[0, 0.03], [0.006, 0.03], [0.006, 0.052], [0, 0.052]], MAT.Chrome);
+const housingRig = new THREE.Group(); housingRig.add(housing, hStem); housingRig.position.y = 0.09; housingRig.visible = false; cart.add(housingRig);
+
+// ---------- post ----------
 const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType, samples: 0 }));
 composer.addPass(new RenderPass(scene, camera));
 if (OPT.ao) {
@@ -124,37 +254,391 @@ if (OPT.ao) {
   ao.updateGtaoMaterial({ radius: 0.012, distanceExponent: 1.4, thickness: 1, scale: 1.1, samples: 12 });
   ao.blendIntensity = 0.85; composer.addPass(ao);
 }
-if (OPT.dof) composer.addPass(new BokehPass(scene, camera, { focus: 0.66, aperture: OPT.aperture, maxblur: 0.02 }));
+let bokeh = null;
+if (OPT.dof) { bokeh = new BokehPass(scene, camera, { focus: 0.66, aperture: OPT.aperture, maxblur: 0.02 }); composer.addPass(bokeh); }
 composer.addPass(new OutputPass());
 composer.addPass(new SMAAPass(W, H));
 
+// ---------- overlays ----------
+const UI = document.getElementById('ui');
+const el = (cls, html = '') => { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; UI.appendChild(d); return d; };
+const LABELS = [];
+function mkLabel(text, anchor, dx, dy) {
+  const L = { leader: el('leader'), dot: el('dot'), box: el('label', text), anchor, dx, dy, s: { d: 0, l: 0, b: 0, o: 1 } };
+  LABELS.push(L); return L;
+}
+const BADGES = [];
+function mkBadge(html, cls = '', top = 330) { const b = { el: el('badge ' + cls, html), s: { v: 0 }, top }; BADGES.push(b); return b; }
+const ring = { el: el('ring'), txt: el('ringtxt'), s: { v: 0 }, anchor: null, text: '' };
+const xm = { el: el('xmark'), s: { v: 0 }, anchor: null };
+const fx = { vig: 0, flash: 0, black: 0, q: 0 };
+
+// captions: chunks of up to 3 words, broken at punctuation
+const CHUNKS = []; {
+  let cur = [];
+  WORDS.forEach((x, i) => { cur.push(i); if (cur.length === 3 || /[.,?!:]$/.test(x.text)) { CHUNKS.push(cur); cur = []; } });
+  if (cur.length) CHUNKS.push(cur);
+}
+const capEl = document.getElementById('cap'); let capShown = -1;
+
+// ---------- state + timeline ----------
 const N = {};
 const tl = gsap.timeline({ paused: true });
-let ready; window.ready = new Promise((r) => (ready = r));
+const cam = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0, f: 0.66, shake: 0 };
+const stem = { L: 0.002, extra: 0 };
+let yB = 0, rOpen = 0; const K = THREE.MathUtils.degToRad(810) / 0.006;
+const washerG = new THREE.Group(), oringG = new THREE.Group();
+const film = { stem: 0, bead: 0, riv: 0 };
+let filmStem, bead, riv, washerNew, washerWorn, oring;
 
+function V(tx, ty, tz, dist, yaw = 0, pitch = 0) {
+  return { tx, ty, tz, f: dist, x: tx + dist * Math.cos(pitch) * Math.cos(yaw), y: ty + dist * Math.sin(pitch), z: tz + dist * Math.cos(pitch) * Math.sin(yaw) };
+}
+const VIEW = {
+  pipe: V(0, 1.083, 0.135, 0.60, 0.42, 0.06),
+  pipe2: V(0, 1.082, 0.115, 0.52, 0.30, 0.05),
+  valve: V(0, 1.117, 0.158, 0.66, 0.10, 0.03),
+  seat: V(0, 1.090, 0.150, 0.30, 0.22, 0.10),
+  bonnet: V(0, 1.132, 0.150, 0.36, 0.20, 0.06),
+  wide: V(0, 1.112, 0.130, 0.92, 0.42, 0.10),
+  drip: V(0, 1.084, 0.213, 0.30, 0.25, 0.04),
+  stage: V(0, 1.122, 0.160, 0.38, 0.30, 0.52),
+  wall: V(0, 1.080, 0.045, 0.30, 1.05, 0.12),
+};
+const go = (v, t, dur, ease = 'power2.inOut') => tl.to(cam, { ...v, duration: dur, ease }, t);
+const S = (o, t, v = true) => tl.set(o, { visible: v }, t);
+const FT = (o, from, to, t) => tl.fromTo(o, from, { ...to, immediateRender: false }, t);
+function pop(L, t, hold) {
+  FT(L.s, { d: 0 }, { d: 1, duration: 0.18, ease: 'back.out(3)' }, t);
+  FT(L.s, { l: 0 }, { l: 1, duration: 0.22, ease: 'power2.out' }, t + 0.08);
+  FT(L.s, { b: 0 }, { b: 1, duration: 0.28, ease: 'back.out(2.5)' }, t + 0.2);
+  FT(L.s, { o: 1 }, { o: 0, duration: 0.25 }, t + hold);
+}
+function badge(B, t, hold) {
+  FT(B.s, { v: 0 }, { v: 1, duration: 0.3, ease: 'back.out(2.2)' }, t);
+  FT(B.s, { v: 1 }, { v: 0, duration: 0.22, ease: 'power2.in' }, t + hold);
+}
+
+function build() {
+  const st = N.StemRig; rOpen = st.rotation.y; yB = st.position.y - 0.006;
+  const WATER = ['W_Supply', 'W_Inlet', 'W_InletUp', 'W_InletEnd', 'W_Chamber', 'W_Spout', 'W_SpoutEnd', 'W_SpoutDown'];
+  WATER.forEach((n) => (N[n].visible = false));
+
+  // rubber parts, built in the stem's / bonnet's own coordinates
+  washerNew = turned([[0.0024, -0.002], [0.0086, -0.002], [0.0088, -0.0016], [0.0088, 0], [0.0024, 0]], washerMat, washerCutMat, 64, true);
+  washerWorn = turned([[0.0024, -0.0018], [0.0052, -0.0018], [0.0060, -0.0009], [0.0066, -0.0009], [0.0074, -0.0018], [0.0090, -0.0015],
+    [0.0096, -0.0006], [0.0093, 0], [0.0024, 0]], washerMat, washerCutMat, 64, true);
+  washerWorn.visible = false;
+  washerG.add(washerNew, washerWorn); washerG.position.y = 0.003; washerG.visible = false; st.add(washerG);
+  oring = turned(circleProfile(0.0052, 0.0011), MAT.Rubber, MAT.RubberCut, 64, true);
+  oringG.add(oring); oringG.position.y = 0.0055; oringG.visible = false; N.BonnetRig.add(oringG);
+  // leak water creeping up the stem, beading at the bonnet nut and running down its side
+  filmStem = turned([[0.0040, 0], [0.0049, 0], [0.0049, 0.024], [0.0040, 0.024]], MAT.Water, MAT.Water, 64, true);
+  filmStem.position.set(0, 1.115, 0.140); filmStem.visible = false; N.ValveRig.add(filmStem);
+  bead = turned(circleProfile(0.0066, 0.0013), MAT.Water, MAT.Water, 64, true); bead.position.set(0, 1.1392, 0.140); bead.visible = false; N.ValveRig.add(bead);
+  const rg = new THREE.CapsuleGeometry(0.0012, 0.018, 6, 16); rg.translate(0, -0.009, 0);
+  riv = new THREE.Mesh(rg, MAT.Water); riv.position.set(-0.004, 1.139, 0.140 + 0.0177); riv.visible = false; N.ValveRig.add(riv);
+
+  // ---- initial state ----
+  Object.assign(cam, VIEW.pipe); cam.shake = 1;
+  tl.set(cam, { ...VIEW.pipe, shake: 1 }, 0);
+  tl.set(N.ValveRig.position, { z: 0.075 }, 0); S(N.ValveRig, 0, false); S(N.W_Supply, 0);
+  tl.set(stem, { L: 0.002, extra: 0 }, 0);
+  tl.set(jetState, { p: 1 }, 0); S(jetRig, 0); S(plugRig, 0, false);
+
+  // ---- 1. cut pipe, water blasting out (0 - 6.5) ----
+  tl.to(cam, { shake: 0.25, duration: 3.0, ease: 'power1.out' }, 0.2);
+  go(VIEW.pipe2, 3.4, 3.0, 'sine.inOut');
+  const psi = mkBadge('50 PSI<small>POUNDS PER SQ. INCH</small>', 'blue');
+  badge(psi, w('fifty') - 0.05, wEnd('inch') - w('fifty') + 0.5);
+
+  // ---- 2. jam a metal plug in (6.6 - 11.3) ----
+  S(plugRig, w('jam') - 0.3);
+  FT(plugRig.position, { z: 0.30, y: 1.09 }, { z: 0.135, y: 1.080, duration: w('hole') - w('jam') + 0.3, ease: 'power3.out' }, w('jam') - 0.3);
+  tl.to(plugRig.position, { z: 0.104, duration: 0.16, ease: 'power3.in' }, w('stops') - 0.2);
+  tl.to(jetState, { p: 0, duration: 0.14, ease: 'power2.in' }, w('stops') - 0.08);
+  S(jetRig, w('stops') + 0.07, false);
+  FT(cam, { shake: 0 }, { shake: 0.9, duration: 0.05 }, w('stops') - 0.04);
+  tl.to(cam, { shake: 0, duration: 0.45, ease: 'power2.out' }, w('stops') + 0.02);
+  const noWater = mkBadge('NO WATER', 'red');
+  badge(noWater, w("can't") - 0.1, w('so', 2) - w("can't") - 0.1);
+
+  // ---- 3. plug on a screw = valve (11.4 - 17.0) ----
+  const b3 = w('so', 2);
+  tl.to(plugRig.position, { z: 0.34, y: 1.16, duration: 0.45, ease: 'power2.in' }, b3 + 0.05);
+  S(plugRig, b3 + 0.5, false);
+  go(VIEW.valve, b3, 1.2);
+  S(N.ValveRig, b3 + 0.15);
+  tl.to(N.ValveRig.position, { z: 0, duration: 0.7, ease: 'power3.out' }, b3 + 0.15);
+  const fill = (n, axis, t0, d) => { tl.set(N[n].scale, { [axis]: 0.02 }, 0); S(N[n], t0); tl.to(N[n].scale, { [axis]: 1, duration: d, ease: 'power1.in' }, t0); };
+  fill('W_Inlet', 'z', b3 + 0.85, 0.14); S(N.W_InletEnd, b3 + 0.99); fill('W_InletUp', 'y', b3 + 0.99, 0.1);
+  tl.set(N.W_Chamber.scale, { y: 0.02 }, 0); tl.set(N.W_Spout.scale, { z: 0.02 }, 0); tl.set(N.W_SpoutDown.scale, { y: 0.02 }, 0);
+
+  const open = (t, L = 0.0065, d = 0.9) => tl.to(stem, { L, duration: d, ease: 'power1.inOut' }, t);
+  const close = (t, L, d = 0.8) => tl.to(stem, { L, duration: d, ease: 'power1.inOut' }, t);
+  function flow(t) {
+    S(N.W_Chamber, t); tl.to(N.W_Chamber.scale, { y: 1, duration: 0.2, ease: 'power1.in' }, t);
+    S(N.W_Spout, t + 0.2); tl.set(N.W_Spout.scale, { z: 0.02 }, t + 0.2); tl.to(N.W_Spout.scale, { z: 1, duration: 0.1 }, t + 0.2);
+    S(N.W_SpoutEnd, t + 0.3); S(N.W_SpoutDown, t + 0.3); tl.set(N.W_SpoutDown.scale, { y: 0.02 }, t + 0.3); tl.to(N.W_SpoutDown.scale, { y: 1, duration: 0.1 }, t + 0.3);
+    S(streamRig, t + 0.4); tl.set(streamRig.position, { y: 1.062 }, t + 0.4); tl.set(streamRig.scale, { y: 0.001 }, t + 0.4);
+    tl.to(streamRig.scale, { y: 1, duration: 0.14, ease: 'power1.in' }, t + 0.4);
+  }
+  function stop(t, residual = 0.15) {
+    tl.to(streamRig.position, { y: 1.062 - 0.32, duration: 0.2, ease: 'power2.in' }, t); S(streamRig, t + 0.2, false);
+    tl.to(N.W_Chamber.scale, { y: residual, duration: 0.4, ease: 'power1.out' }, t + 0.05);
+    ['W_Spout', 'W_SpoutEnd', 'W_SpoutDown'].forEach((n) => S(N[n], t + 0.15, false));
+  }
+  open(w('one') - 0.15, 0.0065, 0.9); flow(w('one') + 0.35);
+  close(w('back') - 0.1, 0.002, 0.75); stop(w('closes') + 0.05, 0.12);
+  const lValve = mkLabel('VALVE', () => new THREE.Vector3(0, 1.098, 0.165), -500, -420);
+  pop(lValve, w('valve') - 0.25, wEnd('valve') - w('valve') + 1.0);
+
+  // ---- 4. still leaks: metal on metal (17.1 - 21.9) ----
+  const b4 = w('but', 2);
+  dripRun(w('leaks') - 0.4, w('so', 3) + 0.6, 0.95);
+  go(VIEW.seat, w('metal', 2) - 0.2, 1.1);
+  ring.anchor = () => new THREE.Vector3(0, 1.0882, 0.1485);
+  FT(ring.s, { v: 0 }, { v: 1, duration: 0.3, ease: 'back.out(2)' }, w('scratch') - 0.6);
+  tl.set(ring, { text: 'GAP' }, b4);
+  FT(ring.s, { v: 1 }, { v: 0, duration: 0.2 }, w('so', 3) - 0.05);
+
+  // ---- 5. rubber washer (22.0 - 27.4) ----
+  const b5 = w('so', 3);
+  go(VIEW.valve, b5, 0.9);
+  open(b5 + 0.1, 0.0065, 0.7); flow(b5 + 0.5);
+  S(washerG, w('disc') - 0.5);
+  FT(washerG.position, { x: 0.05, y: -0.006 }, { x: 0, y: 0.003, duration: 0.6, ease: 'power3.out' }, w('disc') - 0.5);
+  close(w('squishes') - 0.15, 0.0034, 0.8); stop(w('squishes') + 0.45, 0.0);
+  tl.set(N.W_Chamber, { visible: false }, w('squishes') + 0.9);
+  FT(washerG.scale, { y: 1, x: 1, z: 1 }, { y: 0.7, x: 1.04, z: 1.04, duration: 0.25, ease: 'power2.out' }, w('squishes') + 0.5);
+  const lWasher = mkLabel('WASHER', () => washerG.localToWorld(new THREE.Vector3(0, -0.001, 0.007)), -560, -380);
+  pop(lWasher, w('washer') - 0.25, wEnd('washer') - w('washer') + 0.9);
+
+  // ---- 6. leak up the stem + O-ring (27.5 - 33.3) ----
+  const b6 = w('now', 2);
+  open(b6, 0.0065, 0.7); tl.to(washerG.scale, { y: 1, x: 1, z: 1, duration: 0.3 }, b6 + 0.1); flow(b6 + 0.35);
+  go(VIEW.bonnet, b6 + 0.3, 1.0);
+  S(filmStem, w('sneaks') - 0.1); FT(filmStem.scale, { y: 0.01 }, { y: 1, duration: 1.3, ease: 'power1.inOut' }, w('sneaks') - 0.1);
+  S(bead, w('out', 2) - 0.3); FT(bead.scale, { x: 0.3, y: 0.3, z: 0.3 }, { x: 1, y: 1, z: 1, duration: 0.35, ease: 'back.out(2)' }, w('out', 2) - 0.3);
+  S(riv, w('around', 2) - 0.1); FT(riv.scale, { y: 0.01 }, { y: 1, duration: 0.6, ease: 'power1.in' }, w('around', 2) - 0.1);
+  S(oringG, w('wrap') - 0.2);
+  FT(oringG.position, { x: 0.045, y: 0.02 }, { x: 0, y: 0.0055, duration: 0.6, ease: 'power3.out' }, w('wrap') - 0.2);
+  tl.to(filmStem.scale, { y: 0.01, duration: 0.6, ease: 'power1.in' }, w('stem', 1) - 0.1);
+  tl.to([bead.scale], { x: 0.01, y: 0.01, z: 0.01, duration: 0.4 }, w('stem', 1));
+  tl.to(riv.scale, { y: 0.01, duration: 0.4 }, w('stem', 1));
+  [filmStem, bead, riv].forEach((o) => S(o, w('stem', 1) + 0.65, false));
+  const lOring = mkLabel('O-RING', () => N.BonnetRig.localToWorld(new THREE.Vector3(0, 0.0055, 0.0051)), -520, -380);
+  pop(lOring, w('o-ring') - 0.25, wEnd('o-ring') - w('o-ring') + 0.7);
+
+  // ---- 7. you built a faucet; closing crushes and grinds the washer (33.5 - 40.0) ----
+  const b7 = w('congrats');
+  go(VIEW.wide, b7 - 0.1, 1.1);
+  const lFaucet = mkLabel('FAUCET', () => new THREE.Vector3(0, 1.176, 0.14), -470, -330);
+  pop(lFaucet, w('faucet') - 0.25, wEnd('problem') - w('faucet') + 0.1);
+  close(w('shut') - 0.1, 0.0032, 0.75); stop(w('shut') + 0.45, 0.12);
+  tl.to(washerG.scale, { y: 0.6, x: 1.06, z: 1.06, duration: 0.2, ease: 'power2.out' }, w('shut') + 0.5);
+  go(VIEW.seat, w('crush') - 0.3, 0.8);
+  FT(washerMat.emissive, { r: 0, g: 0, b: 0 }, { r: 0.55, g: 0.04, b: 0.02, duration: 0.25, yoyo: true, repeat: 3 }, w('crush'));
+  tl.to(stem, { extra: 0.35, duration: 0.25, yoyo: true, repeat: 3, ease: 'sine.inOut' }, w('grind') - 0.05);
+
+  // ---- 8. years later: hard, cracked, grooved; 50 PSI pushes drops through (40.1 - 48.1) ----
+  const b8 = w('after');
+  go(VIEW.valve, b8, 0.6);
+  const yr = mkBadge('YEAR 1'); yr.year = { y: 1 };
+  badge(yr, w('years') - 0.15, w('hard') - w('years') + 0.9);
+  FT(yr.year, { y: 1 }, { y: 15, duration: 1.9, ease: 'power1.in' }, w('years'));
+  for (let i = 0; i < 4; i++) {
+    const t = w('years') + i * 0.45;
+    tl.to(stem, { L: 0.0062, duration: 0.2, ease: 'sine.inOut' }, t); tl.to(stem, { L: 0.0032, duration: 0.2, ease: 'sine.inOut' }, t + 0.22);
+  }
+  tl.to(washerMat.color, { r: 0.20, g: 0.15, b: 0.12, duration: 1.6 }, w('years'));
+  tl.to(washerMat, { roughness: 0.95, sheen: 0, duration: 1.6 }, w('years'));
+  tl.to(washerCutMat.color, { r: 0.24, g: 0.19, b: 0.15, duration: 1.6 }, w('years'));
+  go(VIEW.seat, w('hard') + 0.1, 0.8);
+  S(washerNew, w('groove') - 0.15, false); S(washerWorn, w('groove') - 0.15);
+  tl.set(ring, { text: 'GAP' }, w('gap') - 0.3);
+  FT(ring.s, { v: 0 }, { v: 1, duration: 0.3, ease: 'back.out(2)' }, w('gap') - 0.3);
+  FT(ring.s, { v: 1 }, { v: 0, duration: 0.2 }, w('pushes'));
+  tl.to(N.W_Chamber.scale, { y: 0.2, duration: 0.6 }, w('gap'));
+  const psi2 = mkBadge('50 PSI', 'blue');
+  badge(psi2, w('p-s-i') - 0.25, w('time', 2) - w('p-s-i') + 0.6);
+  go(VIEW.drip, w('pushes') - 0.1, 0.9);
+  dripRun(w('drop') - 0.55, w('crank') + 0.4, 1.0);
+
+  // ---- 9. crank it tighter: worse (48.1 - 52.7) ----
+  const b9 = w('crank');
+  go(VIEW.seat, b9 - 0.1, 0.6);
+  tl.to(stem, { extra: -1.2, L: 0.0028, duration: 0.9, ease: 'power2.inOut' }, b9);
+  tl.to(washerG.scale, { y: 0.42, x: 1.1, z: 1.1, duration: 0.9, ease: 'power2.inOut' }, b9);
+  FT(washerMat.emissive, { r: 0, g: 0, b: 0 }, { r: 0.6, g: 0.05, b: 0.02, duration: 0.2, yoyo: true, repeat: 3 }, w('crushes'));
+  go(VIEW.drip, w('rubber', 4) + 0.1, 0.6);
+  dripRun(w('rubber', 4) + 0.4, w('fix') + 0.7, 0.45);
+  FT(fx, { vig: 0 }, { vig: 1, duration: 0.15, yoyo: true, repeat: 1 }, w('worse') - 0.05);
+
+  // ---- 10. the fix: ceramic disc cartridge (52.7 - 64.0) ----
+  const fix = mkBadge('THE FIX?', '', 330);
+  badge(fix, w('fix') - 0.2, w('use') - w('fix') - 0.05);
+  go(VIEW.seat, w('fix'), 0.6);
+  xm.anchor = () => washerG.localToWorld(new THREE.Vector3(0, -0.001, 0.004));
+  FT(xm.s, { v: 0 }, { v: 1, duration: 0.25, ease: 'back.out(2.5)' }, w('stop') + 0.2);
+  FT(xm.s, { v: 1 }, { v: 0, duration: 0.15 }, w('use') - 0.1);
+  const cut = w('use') - 0.05;
+  FT(fx, { flash: 0 }, { flash: 1, duration: 0.08 }, cut - 0.08); tl.to(fx, { flash: 0, duration: 0.35 }, cut);
+  const WSET = ['W_Supply', 'W_Inlet', 'W_InletUp', 'W_InletEnd', 'W_Chamber'];
+  [N.ValveRig, N.Pipe_Stub_Cut, flange, ...WSET.map((n) => N[n])].forEach((o) => S(o, cut, false));
+  tl.set(cam, { ...VIEW.stage }, cut); S(cart, cut);
+  tl.set(cartState, { top: 0.024, bot: -0.024, rot: -1.5708, inT: 0, flow: 0, drain: 0 }, 0);
+  FT(cartState, { inT: 0 }, { inT: 1, duration: 0.6, ease: 'power3.out' }, cut);
+  FT(cartState, { top: 0.024, bot: -0.024 }, { top: 0.008, bot: -0.0115, duration: 0.8, ease: 'power3.out' }, cut);
+  tl.to(cam, { ...V(0, 1.122, 0.16, 0.34, 0.45, 0.62), duration: w('line') - cut, ease: 'sine.inOut' }, cut);
+  tl.to(cartState, { top: 0.0002, bot: -0.0036, duration: 0.45, ease: 'power2.inOut' }, w('line') - 0.25);
+  tl.to(cartState, { rot: 0, duration: 0.6, ease: 'power2.inOut' }, w('line'));
+  tl.to(cartState, { flow: 1, duration: 0.35, ease: 'power1.in' }, w('flows') - 0.25);
+  tl.to(cartState, { rot: -1.5708, duration: 0.6, ease: 'power2.inOut' }, w('slide'));
+  tl.to(cartState, { drain: 1, duration: 0.35, ease: 'power2.in' }, w('stops', 2) - 0.25);
+  S(housingRig, w('cartridge') - 0.6);
+  FT(housingRig.position, { y: 0.09 }, { y: 0, duration: 0.6, ease: 'power3.out' }, w('cartridge') - 0.6);
+  go(V(0, 1.13, 0.16, 0.42, 0.35, 0.35), w('cartridge') - 0.6, 1.2);
+  const lCart = mkLabel('CARTRIDGE', () => cart.localToWorld(new THREE.Vector3(0, 0.03, -0.026)), -560, -430);
+  pop(lCart, w('cartridge') - 0.15, 64.0 - w('cartridge') - 0.3);
+
+  // ---- 11. 3,000 gallons a year; who pushes the water? (64.1 - end) ----
+  const b11 = w('one', 3);
+  S(cart, b11 - 0.05, false);
+  [N.ValveRig, N.Pipe_Stub_Cut, flange, ...WSET.map((n) => N[n])].forEach((o) => S(o, b11 - 0.05));
+  tl.set(cam, { ...VIEW.drip }, b11 - 0.05);
+  dripRun(b11 - 0.2, w('wait') + 0.3, 1.0);
+  const perSec = mkBadge('1 DRIP / SEC', 'blue');
+  badge(perSec, b11, w('three') - b11 - 0.2);
+  const gal = mkBadge('0<small>GALLONS / YEAR</small>', 'blue', 330); gal.count = { g: 0 };
+  badge(gal, w('three') - 0.1, w('wait') - w('three') + 0.3);
+  FT(gal.count, { g: 0 }, { g: 3000, duration: 1.0, ease: 'power2.out' }, w('three'));
+  go(V(0, 1.085, 0.13, 0.80, 0.55, 0.08), w('wait') - 0.1, 0.9, 'power2.inOut');
+  go(VIEW.wall, w('pushing') - 0.1, 2.2, 'power2.inOut');
+  FT(fx, { q: 0 }, { q: 1, duration: 0.3, ease: 'back.out(2)' }, w('house') - 0.1);
+  FT(fx, { black: 0 }, { black: 0.55, duration: 0.6 }, w('first') - 0.1);
+  tl.set({}, {}, DURATION);
+}
+
+// ---------- per-frame updates ----------
+const tmp = new THREE.Vector3(), dummy = new THREE.Object3D();
+function toScreen(v) { v.project(camera); return [(v.x * 0.5 + 0.5) * W, (-v.y * 0.5 + 0.5) * H]; }
+const hash = (i) => { const s = Math.sin(i * 12.9898) * 43758.5453; return s - Math.floor(s); };
+
+function updateCamera(t) {
+  const sh = cam.shake * 0.0018;
+  const n = (k) => Math.sin(t * 37.1 + k) * 0.6 + Math.sin(t * 61.7 + k * 2.3) * 0.4;
+  camera.position.set(cam.x + n(1) * sh, cam.y + n(2) * sh, cam.z + n(3) * sh);
+  camera.lookAt(cam.tx, cam.ty, cam.tz); camera.updateMatrixWorld();
+  if (bokeh) bokeh.uniforms.focus.value = cam.f;
+}
+function updateStem() {
+  const st = N.StemRig; if (!st) return;
+  st.position.y = yB + stem.L; st.rotation.y = rOpen + (stem.L - 0.0065) * K + stem.extra;
+}
+function updateJet(t) {
+  const p = jetState.p;
+  jet.scale.set(Math.max(p, 0.001), Math.max(p, 0.001), 1);
+  spray.visible = jetRig.visible && p > 0.01;
+  if (!spray.visible) return;
+  for (let i = 0; i < SPRAY_N; i++) {
+    const ph = hash(i + 1), life = (t * 1.7 + ph) % 1, ang = hash(i + 7) * Math.PI * 2;
+    const rad = 0.007 + life * (0.004 + 0.045 * hash(i + 3) * hash(i + 3));
+    dummy.position.set(Math.cos(ang) * rad, 1.080 + Math.sin(ang) * rad - life * life * 0.035, 0.11 + life * 0.30);
+    const s = (0.0007 + 0.0017 * hash(i + 11)) * (1 - life * 0.4) * p;
+    dummy.scale.set(s, s * (1 + 1.5 * hash(i + 5)), s); dummy.rotation.set(0, 0, 0); dummy.updateMatrix();
+    spray.setMatrixAt(i, dummy.matrix);
+  }
+  spray.instanceMatrix.needsUpdate = true;
+}
+function updateDrips(t) {
+  drops.forEach((d) => (d.visible = false));
+  let k = 0;
+  for (const d0 of DRIPS) {
+    const a = t - d0; if (a < 0 || a > 0.95 || k >= drops.length) continue;
+    const m = drops[k++]; m.visible = true;
+    if (a < 0.62) { const g = Math.min(a / 0.62, 1), r = 0.0034 * Math.pow(g, 0.6); m.scale.set(r, r * (1 + 0.35 * g), r); m.position.set(TIP.x, TIP.y - r * (0.6 + 0.4 * g), TIP.z); }
+    else { const f = a - 0.62, r = 0.0032; m.scale.set(r * 0.9, r * 1.3, r * 0.9); m.position.set(TIP.x, TIP.y - r - 4.9 * f * f - 0.02 * f, TIP.z); }
+  }
+}
+function updateCart() {
+  dTop.position.y = cartState.top; dBot.position.y = cartState.bot;
+  dTop.rotation.y = cartState.rot; const s = Math.max(cartState.inT, 0.001);
+  dTop.scale.setScalar(s); dBot.scale.setScalar(s);
+  colTop.visible = cartState.inT > 0.95; colTop.scale.y = 1;
+  colBot.visible = cartState.flow > 0.01 && cartState.drain < 0.99;
+  colBot.scale.y = Math.max(cartState.flow * (1 - cartState.drain), 0.001);
+  colBot.position.y = -0.0004 - cartState.drain * 0.05;
+}
+function updateUI(t) {
+  for (const L of LABELS) {
+    const [ax, ay] = toScreen(L.anchor()); const lx = ax + L.dx, ly = ay + L.dy;
+    const bw = L.box.offsetWidth, bh = L.box.offsetHeight, ex = lx + bw * 0.5, ey = ly + bh;
+    const dx = ex - ax, dy = ey - ay, o = L.s.o;
+    Object.assign(L.dot.style, { left: ax + 'px', top: ay + 'px', opacity: Math.min(L.s.d, 1) * o, transform: `scale(${L.s.d})` });
+    Object.assign(L.leader.style, { left: ax + 'px', top: ay + 'px', width: Math.hypot(dx, dy) + 'px', opacity: (L.s.l > 0 ? 1 : 0) * o,
+      transform: `rotate(${Math.atan2(dy, dx)}rad) scaleX(${L.s.l})` });
+    Object.assign(L.box.style, { left: lx + 'px', top: ly + 'px', opacity: Math.min(L.s.b, 1) * o, transform: `scale(${0.6 + 0.4 * L.s.b})` });
+  }
+  for (const B of BADGES) {
+    if (B.year) B.el.firstChild.nodeValue = 'YEAR ' + Math.round(B.year.y);
+    if (B.count) B.el.firstChild.nodeValue = Math.round(B.count.g).toLocaleString('en-US') + (B.count.g > 2999 ? '+' : '');
+    const v = B.s.v;
+    Object.assign(B.el.style, { top: B.top + 'px', opacity: Math.min(Math.max(v, 0), 1), transform: `translate(-50%, 0) scale(${0.6 + 0.4 * v})` });
+  }
+  if (ring.anchor) {
+    const [x, y] = toScreen(ring.anchor()), v = ring.s.v, pulse = 1 + 0.08 * Math.sin(t * 12);
+    Object.assign(ring.el.style, { left: x + 'px', top: y + 'px', opacity: Math.min(Math.max(v, 0), 1), transform: `scale(${v * pulse})` });
+    ring.txt.textContent = ring.text;
+    Object.assign(ring.txt.style, { left: x + 80 + 'px', top: y - 30 + 'px', opacity: Math.min(Math.max(v, 0), 1) });
+  }
+  if (xm.anchor) {
+    const [x, y] = toScreen(xm.anchor()), v = xm.s.v;
+    Object.assign(xm.el.style, { left: x + 'px', top: y + 'px', opacity: Math.min(Math.max(v, 0), 1), transform: `scale(${v})` });
+  }
+  document.getElementById('vig').style.opacity = fx.vig;
+  document.getElementById('flash').style.opacity = fx.flash;
+  document.getElementById('black').style.opacity = fx.black;
+  const q = document.getElementById('q'); q.style.opacity = Math.min(fx.q, 1); q.style.transform = `scale(${0.5 + 0.5 * fx.q})`;
+  // captions
+  let ci = -1;
+  for (let i = 0; i < CHUNKS.length; i++) if (WORDS[CHUNKS[i][0]].start - 0.05 <= t) ci = i;
+  const last = ci >= 0 ? WORDS[CHUNKS[ci][CHUNKS[ci].length - 1]] : null;
+  const visible = ci >= 0 && (t <= last.end + 0.35 || (CHUNKS[ci + 1] && WORDS[CHUNKS[ci + 1][0]].start - 0.05 <= t));
+  if (!visible) { capEl.innerHTML = ''; capShown = -1; return; }
+  if (capShown !== ci) { capEl.innerHTML = CHUNKS[ci].map((i) => `<span>${WORDS[i].text.replace(/[.,?!:]$/, '')}</span>`).join(' '); capShown = ci; }
+  let cur = -1; WORDS.forEach((x, i) => { if (x.start - 0.05 <= t) cur = i; });
+  [...capEl.children].forEach((s, j) => { s.className = CHUNKS[ci][j] === cur ? 'on' : ''; });
+}
+
+window.renderAt = (t) => {
+  tl.seek(Math.max(t, 0.0005), false); uT.value = t;
+  updateStem(); updateJet(t); updateDrips(t); updateCart(); updateCamera(t); updateUI(t);
+  composer.render(); return true;
+};
+window.meta = { FPS, DURATION };
+
+// ---------- load ----------
 const pmrem = new THREE.PMREMGenerator(renderer);
 Promise.all([
-  new HDRLoader().loadAsync("tex/studio.hdr"),
-  new GLTFLoader().loadAsync("valve_real.glb"),
+  new HDRLoader().loadAsync('tex/studio.hdr'),
+  new GLTFLoader().loadAsync('valve_real.glb'),
+  document.fonts.load('900 60px WS'), document.fonts.load('800 40px WS'),
 ]).then(([hdr, g]) => {
   hdr.mapping = THREE.EquirectangularReflectionMapping;
-  // The reflection map lives in a render target, which a lost WebGL context wipes; rebuild it on restore.
   const makeEnv = () => { scene.environment = pmrem.fromEquirectangular(hdr).texture; };
   renderer.domElement.addEventListener('webglcontextrestored', () => setTimeout(makeEnv, 0));
-  makeEnv(); scene.environmentIntensity = 1.15;
-  scene.environmentRotation.set(0, 2.2, 0);
+  makeEnv(); scene.environmentIntensity = 1.15; scene.environmentRotation.set(0, 2.2, 0);
   scene.add(g.scene);
   g.scene.traverse((o) => { if (o.name) N[o.name] = o; });
   const meshes = []; g.scene.traverse((o) => { if (o.isMesh) meshes.push(o); });
   meshes.forEach((o) => {
     const name = o.material?.name || '';
     o.material = MAT[name] || MAT.Brass;
-    const water = name === 'Water';
-    o.castShadow = !water; o.receiveShadow = true;
+    o.castShadow = name !== 'Water'; o.receiveShadow = true;
   });
-  try { build(); } catch (e) { console.log('BUILD ERROR ' + e.message); }
-  // render once to compile everything, then wait until the context is stable before reporting ready
-  composer.render();
+  try { build(); } catch (e) { console.log('BUILD ERROR ' + e.message + ' ' + e.stack); }
+  window.renderAt(0);
   const gl = renderer.getContext();
   const settle = () => new Promise((r) => setTimeout(r, 500));
   (async () => {
@@ -165,54 +649,6 @@ Promise.all([
     ready(!gl.isContextLost());
   })();
 }).catch((e) => { console.log('LOAD ERROR ' + e.message); ready(false); });
-
-const at = (f) => (f - 451) / 30;
-const show = (o, t, v = true) => tl.set(o, { visible: v }, t);
-
-function build() {
-  const water = ['W_Supply', 'W_Inlet', 'W_InletUp', 'W_InletEnd', 'W_Chamber', 'W_Spout', 'W_SpoutEnd', 'W_SpoutDown'];
-  water.forEach((n) => (N[n].visible = false));
-  tl.fromTo(N.ValveRig.position, { z: 0.075 }, { z: 0, duration: at(470), ease: 'power3.out' }, 0);
-  const fill = (n, axis, t0, t1) => {
-    tl.set(N[n].scale, { [axis]: 0.02 }, 0); show(N[n], at(t0));
-    tl.to(N[n].scale, { [axis]: 1, duration: at(t1) - at(t0), ease: 'power1.in' }, at(t0));
-  };
-  fill('W_Supply', 'z', 500, 506); fill('W_Inlet', 'z', 505, 509); show(N.W_InletEnd, at(509)); fill('W_InletUp', 'y', 509, 512);
-  const st = N.StemRig, turn = THREE.MathUtils.degToRad(810);
-  const yOpen = st.position.y, rOpen = st.rotation.y, y0 = yOpen - 0.006, r0 = rOpen - turn;
-  tl.set(st.position, { y: y0 }, 0); tl.set(st.rotation, { y: r0 }, 0);
-  tl.to(st.rotation, { y: rOpen, duration: at(580) - at(540), ease: 'power1.inOut' }, at(540));
-  tl.to(st.position, { y: yOpen, duration: at(580) - at(540), ease: 'power1.inOut' }, at(540));
-  fill('W_Chamber', 'y', 550, 556); fill('W_Spout', 'z', 556, 559); show(N.W_SpoutEnd, at(559)); fill('W_SpoutDown', 'y', 559, 562);
-  show(streamRig, at(562));
-  tl.to(streamRig.scale, { y: 1, duration: 0.14, ease: 'power1.in' }, at(562));
-  tl.to(st.rotation, { y: r0, duration: at(660) - at(620), ease: 'power1.inOut' }, at(620));
-  tl.to(st.position, { y: y0, duration: at(660) - at(620), ease: 'power1.inOut' }, at(620));
-  tl.to(streamRig.position, { y: 1.062 - 0.32, duration: 0.2, ease: 'power2.in' }, at(656));
-  tl.to(N.W_Chamber.scale, { y: 0.27, duration: at(672) - at(657), ease: 'power1.out' }, at(657));
-  ['W_Spout', 'W_SpoutEnd', 'W_SpoutDown'].forEach((n) => show(N[n], at(664), false));
-  const label = document.getElementById('label'), leader = document.getElementById('leader'), dot = document.getElementById('dot');
-  tl.fromTo(dot, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.18, ease: 'back.out(3)' }, 2.3);
-  tl.fromTo(leader, { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.22, ease: 'power2.out' }, 2.4);
-  tl.fromTo(label, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(2.5)' }, 2.55);
-  tl.to([label, leader, dot], { opacity: 0, duration: 0.25 }, 7.5);
-  tl.set({}, {}, DURATION);
-}
-
-const tmp = new THREE.Vector3();
-function placeLabel() {
-  camera.updateMatrixWorld(); tmp.set(0, 1.096, 0.155).project(camera);   // valve body, below the seat
-  const ax = (tmp.x * 0.5 + 0.5) * W, ay = (-tmp.y * 0.5 + 0.5) * H, lx = ax - 470, ly = ay - 360;
-  const dot = document.getElementById('dot'), leader = document.getElementById('leader'), label = document.getElementById('label');
-  dot.style.left = ax + 'px'; dot.style.top = ay + 'px';
-  const dx = lx + 120 - ax, dy = ly + 40 - ay;
-  leader.style.left = ax + 'px'; leader.style.top = ay + 'px'; leader.style.width = Math.hypot(dx, dy) + 'px';
-  leader.style.transform = `rotate(${Math.atan2(dy, dx)}rad) scaleX(${gsap.getProperty(leader, 'scaleX')})`;
-  label.style.left = lx + 'px'; label.style.top = ly + 'px';
-}
-
-window.renderAt = (t) => { tl.seek(t, false); wobble.value = t; placeLabel(); composer.render(); return true; };
-window.meta = { FPS, DURATION };
 </script>
 </body>
 </html>
