@@ -1,0 +1,4 @@
+node_modules/
+*.part.mp4
+faucet-drip/still_*.jpg
+out/

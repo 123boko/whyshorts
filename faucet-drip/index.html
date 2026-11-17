@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #wrap { position: relative; width: 1080px; height: 1920px; }
+  canvas { position: absolute; inset: 0; }
+  .label {
+    position: absolute; transform-origin: 0% 50%; opacity: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 800; letter-spacing: 3px;
+    font-size: 54px; color: #fff; background: rgba(20,17,15,0.88); padding: 14px 30px; border-radius: 40px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35); white-space: nowrap;
+  }
+  .leader { position: absolute; height: 5px; background: rgba(255,255,255,0.95); transform-origin: 0% 50%; opacity: 0; border-radius: 3px; box-shadow: 0 0 8px rgba(0,0,0,0.5); }
+  .dot { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #14110f; border: 5px solid #fff; opacity: 0; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "/node_modules/three/build/three.module.js",
+  "three/addons/": "/node_modules/three/examples/jsm/",
+  "gsap": "/node_modules/gsap/index.js"
+} }
+</script>
+</head>
+<body>
+<div id="wrap">
+  <div class="leader" id="leader"></div>
+  <div class="dot" id="dot"></div>
+  <div class="label" id="label">VALVE</div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { gsap } from 'gsap';
+
+const Q = new URLSearchParams(location.search);
+const OPT = { ao: Q.get('ao') !== '0', dof: Q.get('dof') !== '0', aperture: +(Q.get('ap') || 0.015) };
+const W = 1080, H = 1920, FPS = 30, DURATION = 8.0;
+
+const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+document.getElementById('wrap').prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(2 * Math.atan(18 / 100) * 180 / Math.PI, W / H, 0.01, 20);
+camera.position.set(0.66, 1.128, 0.16); camera.lookAt(0, 1.128, 0.16); camera.updateMatrixWorld();
+
+// ---------- lighting: studio HDRI for reflections + a soft key that casts shadows ----------
+const key = new THREE.DirectionalLight(0xfff1e0, 2.6);
+key.position.set(0.55, 1.75, 0.55); key.target.position.set(0, 1.1, 0.15);
+key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 6; key.shadow.bias = -0.0002; key.shadow.normalBias = 0.0004;
+Object.assign(key.shadow.camera, { left: -0.25, right: 0.25, top: 0.25, bottom: -0.25, near: 0.2, far: 2.5 });
+scene.add(key, key.target);
+const rim = new THREE.SpotLight(0xdfe9ff, 6, 3, 0.5, 0.8); rim.position.set(-0.4, 1.5, 0.9); rim.target.position.set(0, 1.1, 0.15);
+scene.add(rim, rim.target);
+scene.add(new THREE.HemisphereLight(0xfff6ea, 0x8a7a66, 0.25));
+
+// ---------- materials ----------
+const tex = new THREE.TextureLoader();
+function tiled(name, rx, ry, srgb = false) {
+  const t = tex.load(`tex/${name}`); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rx, ry); t.anisotropy = 8;
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const tileMat = (rx, ry) => new THREE.MeshStandardMaterial({
+  map: tiled('tiles_diff.jpg', rx, ry, true), normalMap: tiled('tiles_nor.jpg', rx, ry), roughnessMap: tiled('tiles_rough.jpg', rx, ry),
+  normalScale: new THREE.Vector2(1, 1), roughness: 1, envMapIntensity: 0.8,
+});
+const MAT = {
+  // real cutaway display models are painted on the cut faces
+  SectionFace: new THREE.MeshPhysicalMaterial({ color: 0xa8321f, roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.3 }),
+  Brass: new THREE.MeshPhysicalMaterial({ color: 0xe6b866, metalness: 1, roughness: 0.27 }),
+  BrassScratched: new THREE.MeshPhysicalMaterial({ color: 0xdcae5c, metalness: 1, roughness: 0.38 }),
+  Copper: new THREE.MeshPhysicalMaterial({ color: 0xe39a6e, metalness: 1, roughness: 0.3 }),
+  Chrome: new THREE.MeshPhysicalMaterial({ color: 0xf2f3f5, metalness: 1, roughness: 0.07 }),
+  RubberBlack: new THREE.MeshStandardMaterial({ color: 0x1b1b1b, roughness: 0.7 }),
+  Water: new THREE.MeshPhysicalMaterial({
+    color: 0xd8efff, metalness: 0, roughness: 0.03, transmission: 1, ior: 1.33, thickness: 0.006,
+    attenuationColor: new THREE.Color(0x3d9bff), attenuationDistance: 0.02, specularIntensity: 1, envMapIntensity: 1.3,
+    emissive: new THREE.Color(0x0b4fb3), emissiveIntensity: 0.35,
+  }),
+};
+
+// ---------- set: tiled bathroom wall with the pipe, tiled side wall behind ----------
+const wall = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.6, 0.0127), tileMat(10.6, 8.6));
+wall.position.set(0, 1.3, 0.0127 / 2); wall.receiveShadow = true; scene.add(wall);
+const side = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 2.6), tileMat(10, 8.6));
+side.rotation.y = Math.PI / 2; side.position.set(-0.9, 1.3, 1.5); side.receiveShadow = true; scene.add(side);
+// chrome wall flange around the pipe
+const flange = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.031, 0.004, 64), MAT.Chrome);
+flange.rotation.x = Math.PI / 2; flange.position.set(0, 1.08, 0.0147); flange.castShadow = flange.receiveShadow = true; scene.add(flange);
+
+// ---------- stream: glassy water with ripples ----------
+const wobble = { value: 0 };
+const streamMat = MAT.Water.clone(); streamMat.transmission = 0.92; streamMat.attenuationDistance = 0.014; streamMat.thickness = 0.008;
+streamMat.onBeforeCompile = (sh) => {
+  sh.uniforms.uT = wobble;
+  sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace('#include <begin_vertex>',
+    `vec3 transformed = position;
+     float a = atan(position.z, position.x);
+     float w = sin(position.y * 95.0 + uT * 19.0 + a * 2.0) * 0.00050 + sin(position.y * 230.0 - uT * 33.0 - a * 3.0) * 0.00022;
+     transformed.xz += normalize(position.xz + 1e-6) * w * smoothstep(0.0, -0.02, position.y);`);
+};
+const streamGeo = new THREE.CylinderGeometry(0.0045, 0.0036, 0.30, 48, 160, false); streamGeo.translate(0, -0.15, 0);
+const stream = new THREE.Mesh(streamGeo, streamMat); stream.castShadow = true;
+const streamRig = new THREE.Group(); streamRig.add(stream);
+streamRig.position.set(0, 1.062, 0.215); streamRig.scale.set(1, 0.001, 1); streamRig.visible = false; scene.add(streamRig);
+
+// ---------- post: ambient occlusion, depth of field, anti-aliasing ----------
+const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType, samples: 0 }));
+composer.addPass(new RenderPass(scene, camera));
+if (OPT.ao) {
+  const ao = new GTAOPass(scene, camera, W, H);
+  ao.updateGtaoMaterial({ radius: 0.012, distanceExponent: 1.4, thickness: 1, scale: 1.1, samples: 12 });
+  ao.blendIntensity = 0.85; composer.addPass(ao);
+}
+if (OPT.dof) composer.addPass(new BokehPass(scene, camera, { focus: 0.66, aperture: OPT.aperture, maxblur: 0.02 }));
+composer.addPass(new OutputPass());
+composer.addPass(new SMAAPass(W, H));
+
+const N = {};
+const tl = gsap.timeline({ paused: true });
+let ready; window.ready = new Promise((r) => (ready = r));
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+Promise.all([
+  new HDRLoader().loadAsync("tex/studio.hdr"),
+  new GLTFLoader().loadAsync("valve_real.glb"),
+]).then(([hdr, g]) => {
+  hdr.mapping = THREE.EquirectangularReflectionMapping;
+  scene.environment = pmrem.fromEquirectangular(hdr).texture; scene.environmentIntensity = 1.15;
+  scene.environmentRotation.set(0, 2.2, 0);
+  scene.add(g.scene);
+  g.scene.traverse((o) => { if (o.name) N[o.name] = o; });
+  const meshes = []; g.scene.traverse((o) => { if (o.isMesh) meshes.push(o); });
+  meshes.forEach((o) => {
+    const name = o.material?.name || '';
+    o.material = MAT[name] || MAT.Brass;
+    const water = name === 'Water';
+    o.castShadow = !water; o.receiveShadow = true;
+  });
+  try { build(); } catch (e) { console.log('BUILD ERROR ' + e.message); }
+  ready(true);
+}).catch((e) => { console.log('LOAD ERROR ' + e.message); ready(false); });
+
+const at = (f) => (f - 451) / 30;
+const show = (o, t, v = true) => tl.set(o, { visible: v }, t);
+
+function build() {
+  const water = ['W_Supply', 'W_Inlet', 'W_InletUp', 'W_InletEnd', 'W_Chamber', 'W_Spout', 'W_SpoutEnd', 'W_SpoutDown'];
+  water.forEach((n) => (N[n].visible = false));
+  tl.fromTo(N.ValveRig.position, { z: 0.075 }, { z: 0, duration: at(470), ease: 'power3.out' }, 0);
+  const fill = (n, axis, t0, t1) => {
+    tl.set(N[n].scale, { [axis]: 0.02 }, 0); show(N[n], at(t0));
+    tl.to(N[n].scale, { [axis]: 1, duration: at(t1) - at(t0), ease: 'power1.in' }, at(t0));
+  };
+  fill('W_Supply', 'z', 500, 506); fill('W_Inlet', 'z', 505, 509); show(N.W_InletEnd, at(509)); fill('W_InletUp', 'y', 509, 512);
+  const st = N.StemRig, turn = THREE.MathUtils.degToRad(810);
+  const yOpen = st.position.y, rOpen = st.rotation.y, y0 = yOpen - 0.006, r0 = rOpen - turn;
+  tl.set(st.position, { y: y0 }, 0); tl.set(st.rotation, { y: r0 }, 0);
+  tl.to(st.rotation, { y: rOpen, duration: at(580) - at(540), ease: 'power1.inOut' }, at(540));
+  tl.to(st.position, { y: yOpen, duration: at(580) - at(540), ease: 'power1.inOut' }, at(540));
+  fill('W_Chamber', 'y', 550, 556); fill('W_Spout', 'z', 556, 559); show(N.W_SpoutEnd, at(559)); fill('W_SpoutDown', 'y', 559, 562);
+  show(streamRig, at(562));
+  tl.to(streamRig.scale, { y: 1, duration: 0.14, ease: 'power1.in' }, at(562));
+  tl.to(st.rotation, { y: r0, duration: at(660) - at(620), ease: 'power1.inOut' }, at(620));
+  tl.to(st.position, { y: y0, duration: at(660) - at(620), ease: 'power1.inOut' }, at(620));
+  tl.to(streamRig.position, { y: 1.062 - 0.32, duration: 0.2, ease: 'power2.in' }, at(656));
+  tl.to(N.W_Chamber.scale, { y: 0.27, duration: at(672) - at(657), ease: 'power1.out' }, at(657));
+  ['W_Spout', 'W_SpoutEnd', 'W_SpoutDown'].forEach((n) => show(N[n], at(664), false));
+  const label = document.getElementById('label'), leader = document.getElementById('leader'), dot = document.getElementById('dot');
+  tl.fromTo(dot, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.18, ease: 'back.out(3)' }, 2.3);
+  tl.fromTo(leader, { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.22, ease: 'power2.out' }, 2.4);
+  tl.fromTo(label, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(2.5)' }, 2.55);
+  tl.to([label, leader, dot], { opacity: 0, duration: 0.25 }, 7.5);
+  tl.set({}, {}, DURATION);
+}
+
+const tmp = new THREE.Vector3();
+function placeLabel() {
+  camera.updateMatrixWorld(); tmp.set(0, 1.096, 0.155).project(camera);   // valve body, below the seat
+  const ax = (tmp.x * 0.5 + 0.5) * W, ay = (-tmp.y * 0.5 + 0.5) * H, lx = ax - 470, ly = ay - 360;
+  const dot = document.getElementById('dot'), leader = document.getElementById('leader'), label = document.getElementById('label');
+  dot.style.left = ax + 'px'; dot.style.top = ay + 'px';
+  const dx = lx + 120 - ax, dy = ly + 40 - ay;
+  leader.style.left = ax + 'px'; leader.style.top = ay + 'px'; leader.style.width = Math.hypot(dx, dy) + 'px';
+  leader.style.transform = `rotate(${Math.atan2(dy, dx)}rad) scaleX(${gsap.getProperty(leader, 'scaleX')})`;
+  label.style.left = lx + 'px'; label.style.top = ly + 'px';
+}
+
+window.renderAt = (t) => { tl.seek(t, false); wobble.value = t; placeLabel(); composer.render(); return true; };
+window.meta = { FPS, DURATION };
+</script>
+</body>
+</html>
