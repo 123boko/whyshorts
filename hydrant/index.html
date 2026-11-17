@@ -314,11 +314,11 @@ for (let x = -300; x < 300; x += 9) box(4.5, 0.13, 0.22, MAT.line, x, 0.075, -3.
 box(1600, 0.3, 0.3, MAT.curb, 0, 0.15, 0.15);
 // front strip between the curb and the section plane: grass with a sidewalk, ends exactly at CZ
 box(1600, 0.24, CZ - 0.3, grassStrip, 0, 0.12 - 0.0, 0.3 + (CZ - 0.3) / 2);
-box(1600, 0.25, 0.9, walkMat, 0, 0.13, CZ - 0.45);
+box(1600, 0.25, 0.9, walkMat, 0, 0.13, CZ - 0.46);   // front face recessed 1 cm: no coplanar faces with the grass strip
 // snow cover (hidden for the Florida beat)
 const snowG = new THREE.Group(); scene.add(snowG);
 const snowTop = box(1600, 0.06, 1200, snowBig, 0, 0.03, -609.2, snowG); snowTop.receiveShadow = true;
-box(1600, 0.06, CZ - 0.3, snowStrip, 0, 0.27, 0.3 + (CZ - 0.3) / 2, snowG);
+box(1600, 0.06, CZ - 0.3 + 0.008, snowStrip, 0, 0.29, 0.3 + (CZ - 0.3) / 2 + 0.004, snowG);
 box(1600, 0.05, 2.2, snowStrip, 0, 0.3, -8.1, snowG);
 for (let i = 0; i < 160; i++) { const x = -40 + i * 0.5, s = 0.35 + 0.25 * Math.abs(Math.sin(i * 1.7)); const b = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10), snowMat); b.scale.set(0.55, s * 0.5, 0.28); b.position.set(x, 0.18, -0.05); add(b, snowG); }
 for (let i = 0; i < 160; i++) { const x = -40 + i * 0.5, s = 0.3 + 0.2 * Math.abs(Math.sin(i * 2.3)); const b = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10), snowMat); b.scale.set(0.55, s * 0.5, 0.26); b.position.set(x, 0.18, -6.9); add(b, snowG); }
