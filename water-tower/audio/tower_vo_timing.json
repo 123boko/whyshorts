@@ -1,0 +1,1126 @@
+{
+ "audio": "tower_cepat115.mp3",
+ "speed": 1.15,
+ "fps": 30,
+ "duration": 56.529,
+ "beats": [
+  {
+   "beat": 1,
+   "start": 0.0,
+   "end": 5.357,
+   "text": "Every faucet in town needs about fifty P-S-I of push. So you put a giant pump at the water plant."
+  },
+  {
+   "beat": 2,
+   "start": 5.426,
+   "end": 9.809,
+   "text": "It works, until seven a.m. Everyone showers at once, and the pressure crashes."
+  },
+  {
+   "beat": 3,
+   "start": 9.843,
+   "end": 16.278,
+   "text": "So you buy a pump big enough for the morning rush. Now it sits idle most of the day, and when the power goes out, every faucet goes dry."
+  },
+  {
+   "beat": 4,
+   "start": 16.348,
+   "end": 21.913,
+   "text": "Here's the trick: water is heavy. A column one foot tall pushes down with almost half a P-S-I."
+  },
+  {
+   "beat": 5,
+   "start": 22.017,
+   "end": 27.27,
+   "text": "Stack it about a hundred and fifteen feet tall, and you get fifty P-S-I. No motor. Just gravity."
+  },
+  {
+   "beat": 6,
+   "start": 27.304,
+   "end": 30.957,
+   "text": "So you lift a tank higher than every house in town. That's a water tower."
+  },
+  {
+   "beat": 7,
+   "start": 31.061,
+   "end": 34.737,
+   "text": "Now a small pump can fill it slowly, all night, while everyone's asleep."
+  },
+  {
+   "beat": 8,
+   "start": 34.759,
+   "end": 40.07,
+   "text": "In the morning rush, the tank does the pushing. Power goes out? It keeps pushing, often for about a day."
+  },
+  {
+   "beat": 9,
+   "start": 40.139,
+   "end": 48.093,
+   "text": "And why is the tank so fat? Pressure depends on height, not width. A wide tank holds a ton of water, so the level barely drops, and your pressure stays steady."
+  },
+  {
+   "beat": 10,
+   "start": 48.116,
+   "end": 51.803,
+   "text": "The water at the bottom is kept in reserve, so firefighters always have some."
+  },
+  {
+   "beat": 11,
+   "start": 51.85,
+   "end": 56.557,
+   "text": "But wait. That fire hydrant on your street sits on the water main all winter. Why doesn't it freeze?"
+  }
+ ],
+ "words": [
+  {
+   "text": "Every",
+   "start": 0.0,
+   "end": 0.278
+  },
+  {
+   "text": "faucet",
+   "start": 0.348,
+   "end": 0.626
+  },
+  {
+   "text": "in",
+   "start": 0.696,
+   "end": 0.765
+  },
+  {
+   "text": "town",
+   "start": 0.835,
+   "end": 1.113
+  },
+  {
+   "text": "needs",
+   "start": 1.183,
+   "end": 1.252
+  },
+  {
+   "text": "about",
+   "start": 1.322,
+   "end": 1.53
+  },
+  {
+   "text": "fifty",
+   "start": 1.67,
+   "end": 1.948
+  },
+  {
+   "text": "P-S-I",
+   "start": 2.087,
+   "end": 2.574
+  },
+  {
+   "text": "of",
+   "start": 2.643,
+   "end": 2.713
+  },
+  {
+   "text": "push.",
+   "start": 2.783,
+   "end": 3.27
+  },
+  {
+   "text": "So",
+   "start": 3.409,
+   "end": 3.478
+  },
+  {
+   "text": "you",
+   "start": 3.513,
+   "end": 3.548
+  },
+  {
+   "text": "put",
+   "start": 3.617,
+   "end": 3.687
+  },
+  {
+   "text": "a",
+   "start": 3.757,
+   "end": 3.826
+  },
+  {
+   "text": "giant",
+   "start": 3.896,
+   "end": 4.174
+  },
+  {
+   "text": "pump",
+   "start": 4.243,
+   "end": 4.452
+  },
+  {
+   "text": "at",
+   "start": 4.487,
+   "end": 4.522
+  },
+  {
+   "text": "the",
+   "start": 4.557,
+   "end": 4.591
+  },
+  {
+   "text": "water",
+   "start": 4.661,
+   "end": 4.8
+  },
+  {
+   "text": "plant.",
+   "start": 4.87,
+   "end": 5.357
+  },
+  {
+   "text": "It",
+   "start": 5.426,
+   "end": 5.496
+  },
+  {
+   "text": "works,",
+   "start": 5.67,
+   "end": 6.052
+  },
+  {
+   "text": "until",
+   "start": 6.191,
+   "end": 6.33
+  },
+  {
+   "text": "seven",
+   "start": 6.4,
+   "end": 6.47
+  },
+  {
+   "text": "a.m.",
+   "start": 6.609,
+   "end": 6.887
+  },
+  {
+   "text": "Everyone",
+   "start": 7.165,
+   "end": 7.443
+  },
+  {
+   "text": "showers",
+   "start": 7.513,
+   "end": 7.791
+  },
+  {
+   "text": "at",
+   "start": 7.861,
+   "end": 7.93
+  },
+  {
+   "text": "once,",
+   "start": 8.0,
+   "end": 8.278
+  },
+  {
+   "text": "and",
+   "start": 8.313,
+   "end": 8.348
+  },
+  {
+   "text": "the",
+   "start": 8.417,
+   "end": 8.487
+  },
+  {
+   "text": "pressure",
+   "start": 8.557,
+   "end": 8.835
+  },
+  {
+   "text": "crashes.",
+   "start": 8.974,
+   "end": 9.809
+  },
+  {
+   "text": "So",
+   "start": 9.843,
+   "end": 9.878
+  },
+  {
+   "text": "you",
+   "start": 9.948,
+   "end": 10.017
+  },
+  {
+   "text": "buy",
+   "start": 10.087,
+   "end": 10.157
+  },
+  {
+   "text": "a",
+   "start": 10.191,
+   "end": 10.226
+  },
+  {
+   "text": "pump",
+   "start": 10.296,
+   "end": 10.504
+  },
+  {
+   "text": "big",
+   "start": 10.574,
+   "end": 10.713
+  },
+  {
+   "text": "enough",
+   "start": 10.748,
+   "end": 10.922
+  },
+  {
+   "text": "for",
+   "start": 10.991,
+   "end": 11.061
+  },
+  {
+   "text": "the",
+   "start": 11.096,
+   "end": 11.13
+  },
+  {
+   "text": "morning",
+   "start": 11.2,
+   "end": 11.409
+  },
+  {
+   "text": "rush.",
+   "start": 11.583,
+   "end": 11.965
+  },
+  {
+   "text": "Now",
+   "start": 12.07,
+   "end": 12.174
+  },
+  {
+   "text": "it",
+   "start": 12.209,
+   "end": 12.243
+  },
+  {
+   "text": "sits",
+   "start": 12.313,
+   "end": 12.522
+  },
+  {
+   "text": "idle",
+   "start": 12.591,
+   "end": 12.8
+  },
+  {
+   "text": "most",
+   "start": 12.87,
+   "end": 13.009
+  },
+  {
+   "text": "of",
+   "start": 13.043,
+   "end": 13.078
+  },
+  {
+   "text": "the",
+   "start": 13.148,
+   "end": 13.217
+  },
+  {
+   "text": "day,",
+   "start": 13.322,
+   "end": 13.496
+  },
+  {
+   "text": "and",
+   "start": 13.53,
+   "end": 13.565
+  },
+  {
+   "text": "when",
+   "start": 13.635,
+   "end": 13.704
+  },
+  {
+   "text": "the",
+   "start": 13.739,
+   "end": 13.774
+  },
+  {
+   "text": "power",
+   "start": 13.843,
+   "end": 14.052
+  },
+  {
+   "text": "goes",
+   "start": 14.087,
+   "end": 14.191
+  },
+  {
+   "text": "out,",
+   "start": 14.261,
+   "end": 14.574
+  },
+  {
+   "text": "every",
+   "start": 14.609,
+   "end": 14.887
+  },
+  {
+   "text": "faucet",
+   "start": 14.957,
+   "end": 15.304
+  },
+  {
+   "text": "goes",
+   "start": 15.339,
+   "end": 15.513
+  },
+  {
+   "text": "dry.",
+   "start": 15.583,
+   "end": 16.278
+  },
+  {
+   "text": "Here's",
+   "start": 16.348,
+   "end": 16.487
+  },
+  {
+   "text": "the",
+   "start": 16.557,
+   "end": 16.626
+  },
+  {
+   "text": "trick:",
+   "start": 16.661,
+   "end": 17.183
+  },
+  {
+   "text": "water",
+   "start": 17.252,
+   "end": 17.6
+  },
+  {
+   "text": "is",
+   "start": 17.67,
+   "end": 17.878
+  },
+  {
+   "text": "heavy.",
+   "start": 18.157,
+   "end": 18.481
+  },
+  {
+   "text": "A",
+   "start": 18.528,
+   "end": 18.574
+  },
+  {
+   "text": "column",
+   "start": 18.748,
+   "end": 18.922
+  },
+  {
+   "text": "one",
+   "start": 18.991,
+   "end": 19.13
+  },
+  {
+   "text": "foot",
+   "start": 19.2,
+   "end": 19.409
+  },
+  {
+   "text": "tall",
+   "start": 19.502,
+   "end": 19.687
+  },
+  {
+   "text": "pushes",
+   "start": 19.757,
+   "end": 20.035
+  },
+  {
+   "text": "down",
+   "start": 20.139,
+   "end": 20.243
+  },
+  {
+   "text": "with",
+   "start": 20.313,
+   "end": 20.383
+  },
+  {
+   "text": "almost",
+   "start": 20.557,
+   "end": 20.73
+  },
+  {
+   "text": "half",
+   "start": 20.8,
+   "end": 20.939
+  },
+  {
+   "text": "a",
+   "start": 21.009,
+   "end": 21.078
+  },
+  {
+   "text": "P-S-I.",
+   "start": 21.148,
+   "end": 21.913
+  },
+  {
+   "text": "Stack",
+   "start": 22.017,
+   "end": 22.122
+  },
+  {
+   "text": "it",
+   "start": 22.191,
+   "end": 22.226
+  },
+  {
+   "text": "about",
+   "start": 22.261,
+   "end": 22.4
+  },
+  {
+   "text": "a",
+   "start": 22.435,
+   "end": 22.47
+  },
+  {
+   "text": "hundred",
+   "start": 22.539,
+   "end": 22.678
+  },
+  {
+   "text": "and",
+   "start": 22.748,
+   "end": 22.817
+  },
+  {
+   "text": "fifteen",
+   "start": 22.852,
+   "end": 23.096
+  },
+  {
+   "text": "feet",
+   "start": 23.235,
+   "end": 23.374
+  },
+  {
+   "text": "tall,",
+   "start": 23.443,
+   "end": 23.791
+  },
+  {
+   "text": "and",
+   "start": 23.861,
+   "end": 23.93
+  },
+  {
+   "text": "you",
+   "start": 23.965,
+   "end": 24.0
+  },
+  {
+   "text": "get",
+   "start": 24.07,
+   "end": 24.278
+  },
+  {
+   "text": "fifty",
+   "start": 24.348,
+   "end": 24.626
+  },
+  {
+   "text": "P-S-I.",
+   "start": 24.696,
+   "end": 25.53
+  },
+  {
+   "text": "No",
+   "start": 25.6,
+   "end": 25.67
+  },
+  {
+   "text": "motor.",
+   "start": 25.739,
+   "end": 26.296
+  },
+  {
+   "text": "Just",
+   "start": 26.4,
+   "end": 26.504
+  },
+  {
+   "text": "gravity.",
+   "start": 26.574,
+   "end": 27.27
+  },
+  {
+   "text": "So",
+   "start": 27.304,
+   "end": 27.339
+  },
+  {
+   "text": "you",
+   "start": 27.409,
+   "end": 27.478
+  },
+  {
+   "text": "lift",
+   "start": 27.548,
+   "end": 27.617
+  },
+  {
+   "text": "a",
+   "start": 27.687,
+   "end": 27.757
+  },
+  {
+   "text": "tank",
+   "start": 27.861,
+   "end": 27.965
+  },
+  {
+   "text": "higher",
+   "start": 28.104,
+   "end": 28.243
+  },
+  {
+   "text": "than",
+   "start": 28.348,
+   "end": 28.452
+  },
+  {
+   "text": "every",
+   "start": 28.522,
+   "end": 28.8
+  },
+  {
+   "text": "house",
+   "start": 28.87,
+   "end": 29.009
+  },
+  {
+   "text": "in",
+   "start": 29.078,
+   "end": 29.217
+  },
+  {
+   "text": "town.",
+   "start": 29.496,
+   "end": 29.82
+  },
+  {
+   "text": "That's",
+   "start": 29.867,
+   "end": 29.948
+  },
+  {
+   "text": "a",
+   "start": 29.983,
+   "end": 30.052
+  },
+  {
+   "text": "water",
+   "start": 30.191,
+   "end": 30.33
+  },
+  {
+   "text": "tower.",
+   "start": 30.47,
+   "end": 30.957
+  },
+  {
+   "text": "Now",
+   "start": 31.061,
+   "end": 31.165
+  },
+  {
+   "text": "a",
+   "start": 31.235,
+   "end": 31.374
+  },
+  {
+   "text": "small",
+   "start": 31.513,
+   "end": 31.652
+  },
+  {
+   "text": "pump",
+   "start": 31.687,
+   "end": 31.861
+  },
+  {
+   "text": "can",
+   "start": 31.93,
+   "end": 32.07
+  },
+  {
+   "text": "fill",
+   "start": 32.104,
+   "end": 32.139
+  },
+  {
+   "text": "it",
+   "start": 32.209,
+   "end": 32.348
+  },
+  {
+   "text": "slowly,",
+   "start": 32.487,
+   "end": 32.939
+  },
+  {
+   "text": "all",
+   "start": 32.974,
+   "end": 33.113
+  },
+  {
+   "text": "night,",
+   "start": 33.183,
+   "end": 33.53
+  },
+  {
+   "text": "while",
+   "start": 33.6,
+   "end": 33.67
+  },
+  {
+   "text": "everyone's",
+   "start": 33.739,
+   "end": 34.087
+  },
+  {
+   "text": "asleep.",
+   "start": 34.157,
+   "end": 34.737
+  },
+  {
+   "text": "In",
+   "start": 34.759,
+   "end": 34.783
+  },
+  {
+   "text": "the",
+   "start": 34.852,
+   "end": 34.922
+  },
+  {
+   "text": "morning",
+   "start": 34.957,
+   "end": 35.13
+  },
+  {
+   "text": "rush,",
+   "start": 35.339,
+   "end": 35.594
+  },
+  {
+   "text": "the",
+   "start": 35.641,
+   "end": 35.687
+  },
+  {
+   "text": "tank",
+   "start": 35.757,
+   "end": 35.965
+  },
+  {
+   "text": "does",
+   "start": 36.035,
+   "end": 36.174
+  },
+  {
+   "text": "the",
+   "start": 36.209,
+   "end": 36.243
+  },
+  {
+   "text": "pushing.",
+   "start": 36.313,
+   "end": 36.87
+  },
+  {
+   "text": "Power",
+   "start": 36.974,
+   "end": 37.078
+  },
+  {
+   "text": "goes",
+   "start": 37.113,
+   "end": 37.217
+  },
+  {
+   "text": "out?",
+   "start": 37.287,
+   "end": 37.75
+  },
+  {
+   "text": "It",
+   "start": 37.797,
+   "end": 37.843
+  },
+  {
+   "text": "keeps",
+   "start": 37.913,
+   "end": 38.191
+  },
+  {
+   "text": "pushing,",
+   "start": 38.296,
+   "end": 38.713
+  },
+  {
+   "text": "often",
+   "start": 38.748,
+   "end": 38.957
+  },
+  {
+   "text": "for",
+   "start": 39.026,
+   "end": 39.096
+  },
+  {
+   "text": "about",
+   "start": 39.2,
+   "end": 39.304
+  },
+  {
+   "text": "a",
+   "start": 39.339,
+   "end": 39.374
+  },
+  {
+   "text": "day.",
+   "start": 39.443,
+   "end": 40.07
+  },
+  {
+   "text": "And",
+   "start": 40.139,
+   "end": 40.209
+  },
+  {
+   "text": "why",
+   "start": 40.278,
+   "end": 40.348
+  },
+  {
+   "text": "is",
+   "start": 40.417,
+   "end": 40.487
+  },
+  {
+   "text": "the",
+   "start": 40.522,
+   "end": 40.557
+  },
+  {
+   "text": "tank",
+   "start": 40.626,
+   "end": 40.835
+  },
+  {
+   "text": "so",
+   "start": 40.939,
+   "end": 41.043
+  },
+  {
+   "text": "fat?",
+   "start": 41.322,
+   "end": 41.693
+  },
+  {
+   "text": "Pressure",
+   "start": 41.785,
+   "end": 41.878
+  },
+  {
+   "text": "depends",
+   "start": 42.017,
+   "end": 42.157
+  },
+  {
+   "text": "on",
+   "start": 42.226,
+   "end": 42.365
+  },
+  {
+   "text": "height,",
+   "start": 42.435,
+   "end": 42.852
+  },
+  {
+   "text": "not",
+   "start": 42.922,
+   "end": 42.991
+  },
+  {
+   "text": "width.",
+   "start": 43.27,
+   "end": 43.594
+  },
+  {
+   "text": "A",
+   "start": 43.641,
+   "end": 43.687
+  },
+  {
+   "text": "wide",
+   "start": 43.826,
+   "end": 43.965
+  },
+  {
+   "text": "tank",
+   "start": 44.07,
+   "end": 44.174
+  },
+  {
+   "text": "holds",
+   "start": 44.243,
+   "end": 44.383
+  },
+  {
+   "text": "a",
+   "start": 44.591,
+   "end": 44.661
+  },
+  {
+   "text": "ton",
+   "start": 44.73,
+   "end": 44.8
+  },
+  {
+   "text": "of",
+   "start": 44.87,
+   "end": 44.939
+  },
+  {
+   "text": "water,",
+   "start": 45.009,
+   "end": 45.38
+  },
+  {
+   "text": "so",
+   "start": 45.403,
+   "end": 45.426
+  },
+  {
+   "text": "the",
+   "start": 45.496,
+   "end": 45.565
+  },
+  {
+   "text": "level",
+   "start": 45.739,
+   "end": 45.913
+  },
+  {
+   "text": "barely",
+   "start": 46.017,
+   "end": 46.261
+  },
+  {
+   "text": "drops,",
+   "start": 46.435,
+   "end": 46.643
+  },
+  {
+   "text": "and",
+   "start": 46.678,
+   "end": 46.748
+  },
+  {
+   "text": "your",
+   "start": 46.817,
+   "end": 46.887
+  },
+  {
+   "text": "pressure",
+   "start": 47.061,
+   "end": 47.235
+  },
+  {
+   "text": "stays",
+   "start": 47.304,
+   "end": 47.443
+  },
+  {
+   "text": "steady.",
+   "start": 47.513,
+   "end": 48.093
+  },
+  {
+   "text": "The",
+   "start": 48.116,
+   "end": 48.139
+  },
+  {
+   "text": "water",
+   "start": 48.209,
+   "end": 48.348
+  },
+  {
+   "text": "at",
+   "start": 48.417,
+   "end": 48.487
+  },
+  {
+   "text": "the",
+   "start": 48.522,
+   "end": 48.557
+  },
+  {
+   "text": "bottom",
+   "start": 48.626,
+   "end": 48.835
+  },
+  {
+   "text": "is",
+   "start": 48.904,
+   "end": 49.043
+  },
+  {
+   "text": "kept",
+   "start": 49.113,
+   "end": 49.183
+  },
+  {
+   "text": "in",
+   "start": 49.252,
+   "end": 49.322
+  },
+  {
+   "text": "reserve,",
+   "start": 49.565,
+   "end": 49.843
+  },
+  {
+   "text": "so",
+   "start": 49.878,
+   "end": 50.017
+  },
+  {
+   "text": "firefighters",
+   "start": 50.157,
+   "end": 50.643
+  },
+  {
+   "text": "always",
+   "start": 50.713,
+   "end": 50.991
+  },
+  {
+   "text": "have",
+   "start": 51.061,
+   "end": 51.2
+  },
+  {
+   "text": "some.",
+   "start": 51.478,
+   "end": 51.803
+  },
+  {
+   "text": "But",
+   "start": 51.85,
+   "end": 51.896
+  },
+  {
+   "text": "wait.",
+   "start": 52.174,
+   "end": 52.522
+  },
+  {
+   "text": "That",
+   "start": 52.591,
+   "end": 52.661
+  },
+  {
+   "text": "fire",
+   "start": 52.765,
+   "end": 52.87
+  },
+  {
+   "text": "hydrant",
+   "start": 52.939,
+   "end": 53.148
+  },
+  {
+   "text": "on",
+   "start": 53.217,
+   "end": 53.287
+  },
+  {
+   "text": "your",
+   "start": 53.357,
+   "end": 53.426
+  },
+  {
+   "text": "street",
+   "start": 53.496,
+   "end": 53.704
+  },
+  {
+   "text": "sits",
+   "start": 53.774,
+   "end": 53.913
+  },
+  {
+   "text": "on",
+   "start": 53.948,
+   "end": 53.983
+  },
+  {
+   "text": "the",
+   "start": 54.052,
+   "end": 54.122
+  },
+  {
+   "text": "water",
+   "start": 54.226,
+   "end": 54.33
+  },
+  {
+   "text": "main",
+   "start": 54.4,
+   "end": 54.609
+  },
+  {
+   "text": "all",
+   "start": 54.678,
+   "end": 54.817
+  },
+  {
+   "text": "winter.",
+   "start": 55.096,
+   "end": 55.443
+  },
+  {
+   "text": "Why",
+   "start": 55.513,
+   "end": 55.583
+  },
+  {
+   "text": "doesn't",
+   "start": 55.652,
+   "end": 55.757
+  },
+  {
+   "text": "it",
+   "start": 55.791,
+   "end": 55.93
+  },
+  {
+   "text": "freeze?",
+   "start": 56.139,
+   "end": 56.557
+  }
+ ]
+}
